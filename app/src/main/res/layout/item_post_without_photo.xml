@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/layout_item_post"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:cardCornerRadius="4dp"
+	app:cardUseCompatPadding="true"
+	app:elevation="8dp">
+
+	<RelativeLayout
+		android:id="@+id/container_post_channel_info"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16dp">
+
+		<com.makeramen.roundedimageview.RoundedImageView
+			android:id="@+id/image_channel_avatar"
+			android:layout_width="36dp"
+			android:layout_height="36dp"
+			android:scaleType="centerCrop"
+			app:riv_corner_radius="8dp"
+			tools:background="@color/color_primary_dark"/>
+
+		<TextView
+			android:id="@+id/text_name_channel"
+			fontPath="@string/font_lato_bold"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignTop="@+id/image_channel_avatar"
+			android:layout_marginEnd="4dp"
+			android:layout_marginLeft="12dp"
+			android:layout_marginRight="4dp"
+			android:layout_marginStart="12dp"
+			android:layout_toEndOf="@+id/image_channel_avatar"
+			android:layout_toLeftOf="@+id/button_like_channel"
+			android:layout_toRightOf="@+id/image_channel_avatar"
+			android:layout_toStartOf="@+id/button_like_channel"
+			android:alpha="0.7"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:textColor="#2480e3"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			tools:text="Channel name"/>
+
+		<TextView
+			android:id="@+id/button_like_channel"
+			fontPath="@string/font_lato_heavy"
+			android:layout_width="54dp"
+			android:layout_height="22dp"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:background="@drawable/button_grey"
+			android:drawableEnd="@drawable/ic_thumb_up_grey_16dp"
+			android:drawableRight="@drawable/ic_thumb_up_grey_16dp"
+			android:gravity="center"
+			android:paddingEnd="8dp"
+			android:paddingLeft="4dp"
+			android:paddingRight="8dp"
+			android:paddingStart="4dp"
+			android:textColor="@color/grey_666666"
+			android:textSize="10sp"
+			tools:text="256"/>
+
+		<com.github.curioustechizen.ago.RelativeTimeTextView
+			android:id="@+id/text_time_added_channel"
+			fontPath="@string/font_lato_regular"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/text_name_channel"
+			android:layout_marginEnd="4dp"
+			android:layout_marginLeft="12dp"
+			android:layout_marginRight="4dp"
+			android:layout_marginStart="12dp"
+			android:layout_marginTop="4dp"
+			android:layout_toEndOf="@+id/image_channel_avatar"
+			android:layout_toLeftOf="@+id/button_like_channel"
+			android:layout_toRightOf="@+id/image_channel_avatar"
+			android:layout_toStartOf="@+id/button_like_channel"
+			android:alpha="0.7"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:textSize="12sp"
+			tools:text="3 hours ago"/>
+
+	</RelativeLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="160dp"
+		android:layout_gravity="bottom"
+		android:layout_marginTop="68dp"
+		android:background="@color/bckg_light_grey"
+		android:clipChildren="false"
+		android:clipToPadding="false"
+		android:orientation="vertical"
+		android:paddingBottom="8dp"
+		android:paddingEnd="20dp"
+		android:paddingLeft="20dp"
+		android:paddingRight="20dp"
+		android:paddingStart="20dp"
+		android:paddingTop="20dp">
+
+		<TextView
+			android:id="@+id/text_category_post"
+			style="@style/TagStyle"
+			tools:text="Science"/>
+
+		<TextView
+			android:id="@+id/text_title_post"
+			fontPath="@string/font_lato_bold"
+			android:layout_width="match_parent"
+			android:layout_height="18dp"
+			android:layout_marginTop="8dp"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:textColor="#3d3d3d"
+			android:textSize="14sp"
+			tools:text="Science 101 - Space, Aircraft, Fun and non Fun Stuff and others"
+			/>
+
+		<TextView
+			android:id="@+id/text_content_post"
+			fontPath="@string/font_lato_regular"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:layout_marginTop="6dp"
+			android:ellipsize="end"
+			android:maxLines="3"
+			android:textColor="#3d3d3d"
+			android:textSize="12sp"
+			tools:text="Having been on both sides of the technical interview table, I’d like to share some tips for those being interviewed. In doing so, I’ll share some of the more memorable interviews I’ve been involved in."/>
+
+		<TextView
+			android:id="@+id/text_reading_time_post"
+			fontPath="@string/font_lato_bold"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:layout_marginTop="4dp"
+			android:drawableLeft="@drawable/ic_access_time_grey_444444_18dp"
+			android:drawablePadding="8dp"
+			android:drawableStart="@drawable/ic_access_time_grey_444444_18dp"
+			android:ellipsize="end"
+			android:gravity="center_vertical"
+			android:maxLines="3"
+			android:textColor="#3d3d3d"
+			android:textSize="12sp"
+			tools:text="4 min of reading"
+			/>
+	</LinearLayout>
+</android.support.v7.widget.CardView>

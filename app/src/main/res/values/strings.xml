@@ -1,0 +1,57 @@
+<resources>
+	<string name="app_name" translatable="false">Greak</string>
+	<string name="error_login_failed">Failed to login</string>
+	<string name="read">Read</string>
+	<string name="subscribe">Subuscribe | $4.99</string>
+	<string name="discover">Discover</string>
+	<string name="unsubscribe">Unsubscribe</string>
+	<string name="categories">Categories</string>
+	<string name="zero"
+	        translatable="false">0</string>
+	<string name="reading_time">%d min. reading time</string>
+	<string name="give_tip">Give tip</string>
+	<string name="post_count">Posts:</string>
+	<string name="observing_people">Observers:</string>
+	<string name="new_post_from">New article from %s</string>
+	<string name="login_to_observe_channels">Login to observe channels</string>
+	<string name="this_function_is_available_after_login">This function is available after login</string>
+	<string name="no_observations_yet">No observed channels yet</string>
+	<string name="observe_something">Observe channels, to see here newest author posts</string>
+	<string name="refresh">Refresh</string>
+	<string name="observe">Observe</string>
+	<string name="cancel">Cancel</string>
+	<string name="you_have_just_subscribed_to">You have just subscribed to %s</string>
+	<string name="error_operation_failed">Operation failed</string>
+	<string name="account_required_login">To perform this action, please login..</string>
+	<string name="channel">Channel</string>
+	<string name="suggested_channels">Suggested channels</string>
+	<string name="observed">Observed</string>
+	<string name="favorites">Favorites</string>
+	<string name="no_favorites_yet">No favorites yet</string>
+	<string name="like_something">Like something to see posts here</string>
+	<string name="observing">Observing</string>
+	<string name="password">Password</string>
+	<string name="sign_up">Sign up</string>
+	<string name="email"
+	        translatable="false">Email</string>
+	<string name="sign_in_with_google">Sign in with Google</string>
+	<string name="sign_in_with_email">Sign in with email</string>
+	<string name="sign_in_with_facebook">Sign in with Facebook</string>
+	<string name="sign_in">Sign in</string>
+	<string name="username">Username</string>
+	<string name="login_successful">Login successful</string>
+	<string name="or">Or</string>
+	<string
+		name="accept_terms"><![CDATA[By registering user accepts <a href=\"https://link.io/terms\">Terms of use
+	</a> and <a href=\"https://link.io/privacy-policy\">Privacy Policy</a>.]]></string>
+	<string name="text_size">Text size in Post</string>
+	<string name="notifications">Notifications</string>
+	<string name="my_votes">My votes</string>
+	<string name="logout">Logout</string>
+	<string name="default_font_size"
+	        translatable="false">12</string>
+	<string name="profile">Profile</string>
+	<string name="not_logged">Not logged</string>
+	<string name="sign_out">Sign out</string>
+	<string name="terms_must_be_accepted">Terms must be accepted</string>
+</resources>

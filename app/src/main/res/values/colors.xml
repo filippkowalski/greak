@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">@color/blue_grey_920</color>
+    <color name="color_primary_dark">@color/blue_grey_980</color>
+    <color name="color_accent">#dd2467</color>
+
+	<color name="text_header_color_opacity_60">#99111202</color>
+
+    <color name="line_grey">#979797</color>
+    <color name="bckg_light_grey">#f9f9f9</color>
+
+    <color name="blue_grey_920">#2D3844</color>
+    <color name="blue_grey_980">#252E39</color>
+    <color name="grey_850">#3d3d3d</color>
+    <color name="grey_666666">#666666</color>
+
+    <color name="teal_250">#44c1a5</color>
+    <color name="blue_laguna">#009ae4</color>
+
+    <color name="black_opacity_10">#1A000000</color>
+	<color name="black_opacity_50">#80000000</color>
+    <color name="black_opacity_80">#CC000000</color>
+</resources>

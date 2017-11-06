@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/container_cover_photo_sheet"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	app:layout_behavior="@string/top_sheet_behavior"
+	>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/color_primary_dark"
+		android:orientation="vertical">
+
+		<ImageView
+			android:id="@+id/image_post_cover_photo"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="centerCrop"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@drawable/gradient_shadow_from_bottom"/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:layout_margin="16dp"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/text_tag_post_cover"
+				style="@style/TagStyle"
+				tools:text="Science"/>
+
+			<TextView
+				android:id="@+id/text_title_post_cover"
+				style="@style/TitleTextStyle"
+				android:layout_marginTop="8dp"
+				android:textColor="@android:color/white"
+				tools:text="Science 101"
+				/>
+
+			<TextView
+				android:id="@+id/text_teaser_post_cover"
+				fontPath="@string/font_lato_regular"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:ellipsize="end"
+				android:maxLines="3"
+				android:textColor="@android:color/white"
+				android:textSize="12sp"
+				tools:text="When you enter into any new area of science, you almost always find yourself with a baffling new language of technical terms to learn before you can converse with the experts. This is certainly true in astronomy both in terms of terms that refer to the cosmos and terms that describe the tools of the trade, the most prevalent being the telescope. So to get us off of first base, let’s define some of the key terms that pertain to telescopes to help you be able to talk to them more intelligently."
+				/>
+
+			<TextView
+				fontPath="@string/font_montserrat_bold"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="16dp"
+				android:drawableBottom="@drawable/ic_keyboard_arrow_down_white_48dp"
+				android:drawablePadding="-8dp"
+				android:gravity="center_horizontal"
+				android:letterSpacing="0.2"
+				android:text="@string/read"
+				android:textAllCaps="true"
+				android:textColor="@android:color/white"
+				android:textSize="10sp"/>
+		</LinearLayout>
+	</FrameLayout>
+</FrameLayout>

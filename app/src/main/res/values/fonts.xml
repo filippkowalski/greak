@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="font_lato_heavy"
+	        translatable="false">fonts/LatoLatin-Heavy.ttf</string>
+	<string name="font_lato_bold"
+	        translatable="false">fonts/LatoLatin-Bold.ttf</string>
+	<string name="font_lato_regular"
+	        translatable="false">fonts/LatoLatin-Regular.ttf</string>
+	<string name="font_lato_semibold"
+	        translatable="false">fonts/LatoLatin-Semibold.ttf</string>
+
+	<string name="font_playfair_display_black"
+	        translatable="false">fonts/PlayfairDisplay-Black.otf</string>
+	<string name="font_playfair_display_bold"
+	        translatable="false">fonts/PlayfairDisplay-Bold.otf</string>
+
+	<string name="font_montserrat_bold"
+	        translatable="false">fonts/Montserrat-Bold.otf</string>
+
+</resources>

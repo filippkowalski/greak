@@ -1,0 +1,36 @@
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_item_horizontal"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/bckg_light_grey"
+	android:foreground="?attr/selectableItemBackground">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/text_title_item_category"
+			fontPath="@string/font_lato_bold"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			android:layout_marginBottom="4dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginRight="16dp"
+			android:layout_marginLeft="16dp"
+			android:layout_marginStart="16dp"
+			android:text="@string/categories"
+			android:textAllCaps="true"
+			android:textColor="@color/text_header_color_opacity_60"
+			android:textSize="12sp"/>
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recycler_view_horizontal_category"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+	</LinearLayout>
+</FrameLayout>

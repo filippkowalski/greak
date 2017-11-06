@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:gravity="center"
+	tools:orientation="vertical"
+	>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:orientation="vertical"
+		>
+
+		<TextView
+			android:id="@+id/text_error_title"
+			fontPath="@string/font_lato_regular"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:gravity="center"
+			android:text="@string/login_to_observe_channels"
+			android:textSize="18sp"
+			/>
+
+		<TextView
+			android:id="@+id/text_error_subtitle"
+			fontPath="@string/font_lato_regular"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:gravity="center"
+			android:text="@string/this_function_is_available_after_login"
+			/>
+
+		<TextView
+			android:id="@+id/button_login"
+			android:layout_width="160dp"
+			android:layout_height="28dp"
+			android:layout_gravity="center"
+			android:layout_marginTop="24dp"
+			android:background="@drawable/button_rounded_10_teal"
+			android:gravity="center"
+			android:text="@string/sign_in"
+			android:textColor="@color/teal_250"/>
+	</LinearLayout>
+
+	<include
+		layout="@layout/sheet_login"/>
+
+</merge>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.greak">
+
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+	<application
+		android:name="com.greak.ui.GreakApplication"
+		android:allowBackup="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:supportsRtl="true"
+		android:theme="@style/AppTheme">
+
+		<meta-data
+			android:name="com.facebook.sdk.ApplicationId"
+			android:value="@string/facebook_app_id"/>
+
+		<activity
+			android:name="com.greak.ui.screens.main.MainActivity"
+			android:launchMode="singleTop">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name="com.greak.ui.screens.channel.ChannelActivity"
+			android:launchMode="singleTop"/>
+		<activity
+			android:name="com.greak.ui.screens.post.PostActivity"
+			android:hardwareAccelerated="true"/>
+		<activity
+			android:name="com.greak.ui.screens.category.CategoryActivity"
+			android:launchMode="singleTop"/>
+		<activity
+			android:name="com.greak.ui.screens.main.votes.VotesActivity"
+			android:launchMode="singleTop"/>
+
+		<service
+			android:name="com.greak.service.fcm.AppFirebaseMessagingService">
+			<intent-filter>
+				<action android:name="com.google.firebase.MESSAGING_EVENT"/>
+			</intent-filter>
+		</service>
+
+		<service
+			android:name="com.greak.service.fcm.AppFirebaseInstanceIDService">
+			<intent-filter>
+				<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+			</intent-filter>
+		</service>
+
+		<meta-data
+			android:name="io.fabric.ApiKey"
+			android:value="554d225e5642a5bdc30494682dd49e678af1512b"/>
+
+	</application>
+
+</manifest>

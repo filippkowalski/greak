@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="loading">Ładowanie…</string>
+	<string name="error_connection_problem">Problem z połączeniem internetowym</string>
+	<string name="error_try_again_later">Spróbuj ponownie później…</string>
+	<string name="error_no_articles_to_show">Brak danych do wyświetlenia</string>
+	<string name="error_internet_issue">Problem z internetem!</string>
+	<string name="error_check_internet_connection">Sprawdź czy masz dostęp do internetu</string>
+	<string name="try_again">Spróbuj ponownie</string>
+	<string name="error_unknown">Wystąpił nieznany błąd</string>
+</resources>

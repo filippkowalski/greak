@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="error_login_failed">Nie udało się zalogować</string>
+	<string name="read">Czytaj</string>
+	<string name="subscribe">Subskrybuj | $4.99</string>
+	<string name="discover">Odkrywaj</string>
+	<string name="unsubscribe">Odsubskrybuj</string>
+	<string name="categories">Kategorie</string>
+	<string name="reading_time">%d min. czytania</string>
+	<string name="give_tip">Daj napiwek</string>
+	<string name="post_count">Wpisy:</string>
+	<string name="observing_people">Obserwujący:</string>
+	<string name="observing">Obserwujesz</string>
+	<string name="new_post_from">Nowy artykuł od %s</string>
+	<string name="login_to_observe_channels">Zaloguj się, aby obserwować kanały</string>
+	<string name="this_function_is_available_after_login">Ta funkcja jest dostępna po zalogowaniu</string>
+	<string name="no_observations_yet">Nic jeszcze nie obserwujesz</string>
+	<string name="observe_something">Zacznij coś obserwować, żeby widzieć tutaj najnowsze posty autorów</string>
+	<string name="refresh">Odśwież</string>
+	<string name="observe">Obserwuj</string>
+	<string name="cancel">Anuluj</string>
+	<string name="you_have_just_subscribed_to">Właśnie się zasubskrybowałeś do kanału %s</string>
+	<string name="error_operation_failed">Operacja nie powiodła się</string>
+	<string name="account_required_login">Aby wykonać tę akcję, zaloguj się.</string>
+	<string name="channel">Kanał</string>
+	<string name="suggested_channels">Sugerowane kanały</string>
+	<string name="observed">Obserwowane</string>
+	<string name="favorites">Ulubione</string>
+	<string name="no_favorites_yet">Nie masz jeszcze ulubionych</string>
+	<string name="like_something">Polub coś, żeby zobaczyć posty tutaj</string>
+	<string name="password">Hasło</string>
+	<string name="sign_up">Zarejestruj się</string>
+	<string name="sign_in_with_google">Zaloguj się przez Google</string>
+	<string name="sign_in_with_email">Zaloguj się przez Email</string>
+	<string name="sign_in_with_facebook">Zaloguj się przez Facebooka</string>
+	<string name="sign_in">Zaloguj się</string>
+	<string name="username">Nazwa użytkownika</string>
+	<string name="login_successful">Zalogowano pomyślnie</string>
+	<string name="or">Lub</string>
+	<string
+		name="accept_terms"><![CDATA[Rejestrując się użytkownik oświadcza, że zapoznał się i akceptuje <a href=\"https://linkhere.io/terms\">regulamin</a> oraz
+			<a href=\"https://linkhere.io/privacy-policy\">politykę prywatności</a>.]]></string>
+	<string name="text_size">Rozmiar tekstu w artykule</string>
+	<string name="notifications">Powiadomienia</string>
+	<string name="my_votes">Moje głosy</string>
+	<string name="logout">Wyloguj</string>
+	<string name="profile">Profil</string>
+	<string name="not_logged">Nie zalogowany</string>
+	<string name="sign_out">Wyloguj</string>
+	<string name="terms_must_be_accepted">Regulamin musi być zaakceptowany</string>
+</resources>

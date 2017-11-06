@@ -1,0 +1,43 @@
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/layout_item_horizontal"
+	android:layout_width="190dp"
+	android:layout_height="140dp"
+	android:foreground="?attr/selectableItemBackground"
+	app:cardCornerRadius="8dp"
+	app:cardUseCompatPadding="true">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<com.makeramen.roundedimageview.RoundedImageView
+			android:id="@+id/image_post_element_cover"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_margin="4dp"
+			android:scaleType="centerCrop"
+			app:riv_corner_radius="4dp"
+			tools:background="@color/blue_laguna"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_margin="4dp"
+			android:background="@drawable/bckg_image_overlay_rounded_outline"/>
+
+		<TextView
+			android:id="@+id/text_category_name_horizontal_item"
+			style="@style/TitleTextStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:gravity="center"
+			android:textColor="@android:color/white"
+			android:textSize="22sp"
+			tools:text="@string/categories"/>
+
+	</FrameLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="com.greak.ui.screens.main.MainActivity">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/navigation_bottom_main"
+		android:foreground="@drawable/ab_solid_shadow_holo_bottom">
+
+		<com.greak.ui.views.NonSlidingViewPager
+			android:id="@+id/viewpager_main"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+	</FrameLayout>
+
+	<com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView
+		android:id="@+id/navigation_bottom_main"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		app:bnv_active_color="@color/color_accent"
+		app:bnv_active_text_size="12sp"
+		app:bnv_colored_background="false"
+		app:bnv_inactive_color="@color/line_grey"
+		app:bnv_inactive_text_size="12sp"
+		app:bnv_viewpager_slide="false"
+		/>
+
+</RelativeLayout>

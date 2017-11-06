@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:gravity="center"
+	tools:orientation="vertical"
+	tools:parentTag="android.support.design.widget.CoordinatorLayout"
+	>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:orientation="vertical"
+		>
+
+		<TextView
+			android:id="@+id/text_error_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:gravity="center"
+			android:text="@string/error_internet_issue"
+			android:textSize="18sp"
+			/>
+
+		<TextView
+			android:id="@+id/text_error_subtitle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:gravity="center"
+			android:text="@string/error_check_internet_connection"
+			/>
+
+		<Button
+			android:id="@+id/button_error"
+			android:layout_width="248dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="12dp"
+			android:layout_marginTop="28dp"
+			android:padding="12dp"
+			android:text="@string/try_again"
+			/>
+	</LinearLayout>
+</merge>
