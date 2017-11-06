@@ -9,14 +9,14 @@ import com.chrono.src.ui.list.adapters.decoration.DefaultSpacingItemDecoration;
 import com.chrono.src.ui.list.endless.EndlessListFragment;
 import com.greak.common.utils.StatsConstants;
 import com.greak.data.models.Category;
-import com.greak.data.models.Channel;
+import com.greak.data.models.SteemAccount;
 import com.greak.ui.analytics.FabricAnalyticsManager;
-import com.greak.ui.screens.channel.ChannelActivity;
+import com.greak.ui.screens.user_profile.UserProfileActivity;
 
 import java.util.List;
 
-public class CategoryFragment extends EndlessListFragment<Channel, Channel, ChannelMultiAdapter> implements
-		OnItemClickListener<Channel> {
+public class CategoryFragment extends EndlessListFragment<SteemAccount, SteemAccount, ChannelMultiAdapter> implements
+		OnItemClickListener<SteemAccount> {
 
 	private static final String BUNDLE_CATEGORY = "category";
 	private Category category;
@@ -38,18 +38,18 @@ public class CategoryFragment extends EndlessListFragment<Channel, Channel, Chan
 	}
 
 	@Override
-	public ChannelMultiAdapter createAdapter(List<Channel> data) {
+	public ChannelMultiAdapter createAdapter(List<SteemAccount> data) {
 		return new ChannelMultiAdapter(getContext(), data, this);
 	}
 
 	@Override
-	protected void addItemsToAdapter(List<Channel> data, boolean firstRun) {
+	protected void addItemsToAdapter(List<SteemAccount> data, boolean firstRun) {
 		getAdapter().addItems(data, firstRun);
 	}
 
 	@Override
-	public void onItemClick(Channel channel, int position) {
-		ChannelActivity.Companion.startActivity(getContext(), channel);
+	public void onItemClick(SteemAccount steemAccount, int position) {
+		UserProfileActivity.Companion.startActivity(getContext(), steemAccount);
 	}
 
 	@Override

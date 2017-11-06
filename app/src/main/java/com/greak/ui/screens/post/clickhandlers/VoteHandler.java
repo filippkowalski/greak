@@ -10,17 +10,7 @@ import android.widget.Toast;
 import com.greak.R;
 import com.greak.data.database.UserActionsPreferences;
 import com.greak.data.database.UserInstance;
-import com.greak.data.models.Vote;
-import com.greak.data.rest.ApiService;
-import com.greak.data.rest.RestService;
-import com.greak.ui.screens.main.discover.OnFeedRefreshListener;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.greak.ui.screens.main.trending.OnFeedRefreshListener;
 
 public class VoteHandler {
 
@@ -73,56 +63,14 @@ public class VoteHandler {
 	@DrawableRes
 	private int getButtonDrawable(boolean liked) {
 		if (liked) {
-			return R.drawable.ic_thumb_up_white_16dp;
+			return R.drawable.ic_money_grey_small;
 		} else {
-			return R.drawable.ic_thumb_up_grey_16dp;
+			return R.drawable.ic_money_grey_small;
 		}
 	}
 
 	private void votePost(boolean liked, final long postId, final TextView button) {
-		ApiService service = RestService.getInstance().getApiService();
-		if (liked) {
-			service.unvotePost(postId).enqueue(new Callback<Vote>() {
-				@Override
-				public void onResponse(Call<Vote> call, Response<Vote> response) {
-					if (response.isSuccessful()) {
-						UserActionsPreferences.removeVote(context, postId);
-						changeButtonViewStyle(button, false);
 
-						int votesCount = response.body().getCurrentVotesCount();
-						setButtonValue(votesCount, button);
-						feedRefreshListener.refreshFeed(votesCount);
-					}
-				}
-
-				@Override
-				public void onFailure(Call<Vote> call, Throwable t) {
-					showFailureToast();
-				}
-			});
-		} else {
-			service.votePost(postId).enqueue(new Callback<Vote>() {
-				@Override
-				public void onResponse(Call<Vote> call, Response<Vote> response) {
-					if (response.isSuccessful()) {
-						List<Long> postIds = new ArrayList<>();
-						postIds.add(postId);
-
-						UserActionsPreferences.setVotes(context, postIds);
-						changeButtonViewStyle(button, true);
-
-						int votesCount = response.body().getCurrentVotesCount();
-						setButtonValue(votesCount, button);
-						feedRefreshListener.refreshFeed(votesCount);
-					}
-				}
-
-				@Override
-				public void onFailure(Call<Vote> call, Throwable t) {
-					Toast.makeText(context, R.string.error_operation_failed, Toast.LENGTH_SHORT).show();
-				}
-			});
-		}
 	}
 
 	private void showFailureToast() {

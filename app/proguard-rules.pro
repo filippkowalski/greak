@@ -1,5 +1,16 @@
 -dontobfuscate
+-dontwarn InnerClasses
 -keep class com.chrono.** { *; }
+
+
+-keep class com.fasterxml.** { *; }
+-dontwarn com.fasterxml.**
+
+-dontwarn com.shaded.fasterxml.**
+-dontwarn org.apache.**
+-dontwarn org.shaded.apache.**
+-keepnames class com.shaded.fasterxml.jackson.** { *; }
+-keepnames class org.shaded.apache.**
 
 ## Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule

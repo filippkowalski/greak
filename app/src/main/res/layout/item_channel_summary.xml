@@ -60,9 +60,9 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="12dp"
 		android:layout_marginTop="-8dp"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:padding="12dp">
 
 		<TextView
 			fontPath="@string/font_lato_bold"
@@ -93,11 +93,11 @@
 			android:layout_marginLeft="24dp"
 			android:layout_marginRight="4dp"
 			android:layout_marginStart="24dp"
-			android:text="@string/observing_people"
+			android:text="@string/followers"
 			android:textSize="12sp"/>
 
 		<TextView
-			android:id="@+id/text_observing_count"
+			android:id="@+id/text_followers_count"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginEnd="4dp"
@@ -110,6 +110,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"/>
 
+		<!-- TODO implement this feature in the future -->
 		<TextView
 			android:id="@+id/button_observe"
 			fontPath="@string/font_lato_bold"
@@ -117,9 +118,10 @@
 			android:layout_height="26dp"
 			android:background="@drawable/button_rounded_100_teal"
 			android:gravity="center"
-			android:text="@string/observe"
+			android:text="@string/follow"
 			android:textColor="@color/teal_250"
-			android:textSize="12sp"/>
+			android:textSize="12sp"
+			android:visibility="gone"/>
 
 	</LinearLayout>
 

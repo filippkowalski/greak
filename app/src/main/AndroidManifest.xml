@@ -14,10 +14,6 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 
-		<meta-data
-			android:name="com.facebook.sdk.ApplicationId"
-			android:value="@string/facebook_app_id"/>
-
 		<activity
 			android:name="com.greak.ui.screens.main.MainActivity"
 			android:launchMode="singleTop">
@@ -29,7 +25,7 @@
 		</activity>
 
 		<activity
-			android:name="com.greak.ui.screens.channel.ChannelActivity"
+			android:name="com.greak.ui.screens.user_profile.UserProfileActivity"
 			android:launchMode="singleTop"/>
 		<activity
 			android:name="com.greak.ui.screens.post.PostActivity"
@@ -40,20 +36,6 @@
 		<activity
 			android:name="com.greak.ui.screens.main.votes.VotesActivity"
 			android:launchMode="singleTop"/>
-
-		<service
-			android:name="com.greak.service.fcm.AppFirebaseMessagingService">
-			<intent-filter>
-				<action android:name="com.google.firebase.MESSAGING_EVENT"/>
-			</intent-filter>
-		</service>
-
-		<service
-			android:name="com.greak.service.fcm.AppFirebaseInstanceIDService">
-			<intent-filter>
-				<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-			</intent-filter>
-		</service>
 
 		<meta-data
 			android:name="io.fabric.ApiKey"

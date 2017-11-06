@@ -28,10 +28,6 @@ import java.util.List;
 import lombok.Getter;
 
 /**
- * Created by Filip Kowalski on 05.03.17.
- */
-
-/**
  * Fragment containing endless scrolling functionality.
  * It covers loading, swipe refresh layout, showing loading screens, errors screens.
  *
@@ -85,7 +81,7 @@ public abstract class EndlessListFragment<D extends T, T, A extends RecyclerView
 	}
 
 	protected void initArguments() {
-		// not used
+		// no-op
 	}
 
 	@LayoutRes
@@ -94,9 +90,9 @@ public abstract class EndlessListFragment<D extends T, T, A extends RecyclerView
 	}
 
 	protected void initLayout(View view) {
-		containerLayout = (ViewGroup) view.findViewById(R.id.container_layout);
-		recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-		swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.layout_swipe_refresh);
+		containerLayout = view.findViewById(R.id.container_layout);
+		recyclerView = view.findViewById(R.id.recycler_view);
+		swipeRefreshLayout = view.findViewById(R.id.layout_swipe_refresh);
 	}
 
 	protected void initStateView() {

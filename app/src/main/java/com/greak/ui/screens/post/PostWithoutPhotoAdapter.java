@@ -1,6 +1,7 @@
 package com.greak.ui.screens.post;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -11,23 +12,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chrono.src.common.constants.StringConstants;
 import com.chrono.src.ui.list.OnItemClickListener;
 import com.chrono.src.ui.list.adapters.multitype.MultiTypeAdapter;
 import com.github.curioustechizen.ago.RelativeTimeTextView;
 import com.greak.R;
+import com.greak.common.utils.CurrencyUtils;
 import com.greak.data.database.UserActionsPreferences;
 import com.greak.data.models.Post;
 import com.greak.ui.common.TagViewUtils;
-import com.greak.ui.common.TimeUtils;
-import com.greak.ui.screens.channel.ChannelActivity;
 import com.greak.ui.screens.post.clickhandlers.VoteHandler;
+import com.greak.ui.screens.user_profile.UserProfileActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-/**
- * Created by Filip Kowalski on 22.05.17.
- */
 
 public class PostWithoutPhotoAdapter implements MultiTypeAdapter<PostWithoutPhotoAdapter.ViewHolder, Post> {
 
@@ -47,38 +45,29 @@ public class PostWithoutPhotoAdapter implements MultiTypeAdapter<PostWithoutPhot
 	}
 
 	@Override
-	public void populateViewHolder(ViewHolder holder, final int position, final Post post) {
-		Glide.with(context).load(post.getChannel().getAvatar()).into(holder.avatar);
+	public void populateViewHolder(@NonNull ViewHolder holder, final int position, final Post post) {
+		Glide.with(context)
+				.load(post.getSteemAccount().getAvatar())
+				.placeholder(R.drawable.ic_steem)
+				.into(holder.avatar);
 
 		TagViewUtils tagViewUtils = new TagViewUtils();
-		tagViewUtils.setTagViewParams(post.getChannel().getCategory(), holder.category);
+		tagViewUtils.setTagViewParams(post.getCategory(), holder.category);
 
-		TimeUtils timeUtils = new TimeUtils();
-		holder.readingTime.setText(context.getString(R.string.reading_time, timeUtils.parseReadTimeToMinutes(post
-				.getReadTime())));
+		holder.readingTime.setText(context.getString(R.string.reading_time, post.getReadTime()));
 
 		boolean postLiked = UserActionsPreferences.getVotes(context).contains(post.getId());
-		holder.like.setText(String.valueOf(post.getVotesCount()));
+		holder.earnedMoney.setText(CurrencyUtils.formatCurrency(post.getMoneyEarned()));
 		VoteHandler voteHandler = new VoteHandler(context);
-		voteHandler.changeButtonViewStyle(holder.like, postLiked);
+		voteHandler.changeButtonViewStyle(holder.earnedMoney, postLiked);
 
-		holder.containerChannel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ChannelActivity.Companion.startActivity(context, post.getChannel());
-			}
-		});
+		holder.containerChannel.setOnClickListener(v -> UserProfileActivity.Companion.startActivity(context, post.getSteemAccount()));
 		holder.timeAdded.setReferenceTime(post.getDateCreatedAsTimestamp());
 		holder.postTitle.setText(post.getTitle());
-		holder.postContent.setText(post.getTeaser() != null ?
-				Html.fromHtml(post.getTeaser()) : Html.fromHtml(post.getContent()));
-		holder.channelName.setText(post.getChannel().getName());
-		holder.layout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onItemClick(post, position);
-			}
-		});
+		String content = post.getContent().replaceAll("<img.+?>", StringConstants.EMPTY);
+		holder.postContent.setText(post.getTeaser() != null ? Html.fromHtml(post.getTeaser()) : Html.fromHtml(content));
+		holder.channelName.setText(post.getSteemAccount().getName());
+		holder.layout.setOnClickListener(v -> listener.onItemClick(post, position));
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
@@ -96,7 +85,7 @@ public class PostWithoutPhotoAdapter implements MultiTypeAdapter<PostWithoutPhot
 		TextView postContent;
 
 		@BindView(R.id.button_like_channel)
-		TextView like;
+		TextView earnedMoney;
 
 		@BindView(R.id.text_time_added_channel)
 		RelativeTimeTextView timeAdded;

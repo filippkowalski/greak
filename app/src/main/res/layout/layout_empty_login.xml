@@ -22,7 +22,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
 			android:gravity="center"
-			android:text="@string/login_to_observe_channels"
+			android:text="@string/login_to_see_followed_users"
 			android:textSize="18sp"
 			/>
 
@@ -47,8 +47,5 @@
 			android:text="@string/sign_in"
 			android:textColor="@color/teal_250"/>
 	</LinearLayout>
-
-	<include
-		layout="@layout/sheet_login"/>
 
 </merge>

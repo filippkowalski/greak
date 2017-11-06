@@ -1,5 +1,6 @@
 package com.greak.ui.common.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +19,15 @@ public class HeaderAdapter implements MultiTypeAdapter<HeaderAdapter.ViewHolder,
 	public HeaderAdapter() {
 	}
 
+	@NonNull
 	@Override
-	public ViewHolder getViewHolder(ViewGroup viewGroup) {
+	public ViewHolder getViewHolder(@NonNull ViewGroup viewGroup) {
 		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_header, viewGroup, false);
 		return new ViewHolder(view);
 	}
 
 	@Override
-	public void populateViewHolder(ViewHolder holder, int position, final Header item) {
+	public void populateViewHolder(@NonNull ViewHolder holder, int position, final Header item) {
 		holder.title.setText(item.getTitle());
 	}
 

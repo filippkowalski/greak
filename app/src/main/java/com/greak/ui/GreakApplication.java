@@ -1,14 +1,11 @@
 package com.greak.ui;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.crashlytics.android.Crashlytics;
 import com.greak.BuildConfig;
 import com.greak.R;
-import com.greak.data.database.UserActionsPreferences;
 import com.greak.data.database.UserManager;
-import com.greak.service.tasks.SynchronizationService;
-import com.greak.ui.common.TimeUtils;
 
 import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -17,7 +14,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * Created by Filip Kowalski on 25.02.17.
  */
 
-public class GreakApplication extends Application {
+public class GreakApplication extends MultiDexApplication {
 
 	@Override
 	public void onCreate() {
@@ -34,14 +31,5 @@ public class GreakApplication extends Application {
 
 		UserManager userManager = new UserManager(this);
 		userManager.initializeUser();
-
-
-		TimeUtils timeUtils = new TimeUtils();
-		if (timeUtils.has24hoursPassed(this)) {
-			SynchronizationService synchronizationService = new SynchronizationService();
-			synchronizationService.synchronize(this);
-
-			UserActionsPreferences.setSynchronizationTime(this, System.currentTimeMillis());
-		}
 	}
 }

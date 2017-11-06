@@ -47,19 +47,6 @@
 				/>
 
 			<TextView
-				android:id="@+id/text_teaser_post_cover"
-				fontPath="@string/font_lato_regular"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="8dp"
-				android:ellipsize="end"
-				android:maxLines="3"
-				android:textColor="@android:color/white"
-				android:textSize="12sp"
-				tools:text="When you enter into any new area of science, you almost always find yourself with a baffling new language of technical terms to learn before you can converse with the experts. This is certainly true in astronomy both in terms of terms that refer to the cosmos and terms that describe the tools of the trade, the most prevalent being the telescope. So to get us off of first base, let’s define some of the key terms that pertain to telescopes to help you be able to talk to them more intelligently."
-				/>
-
-			<TextView
 				fontPath="@string/font_montserrat_bold"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

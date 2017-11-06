@@ -56,6 +56,9 @@ class PostHtmlUtils {
                         "a {" +
                         "    color: #44c1a5;" +
                         "    text-decoration: none;" +
+                        "}" +
+                        "img{ " +
+                        "    max-width: 100%; width:auto; height: auto;" +
                         "}"
     }
 }

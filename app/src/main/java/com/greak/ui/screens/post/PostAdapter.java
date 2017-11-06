@@ -1,6 +1,7 @@
 package com.greak.ui.screens.post;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,19 +15,15 @@ import com.chrono.src.ui.list.OnItemClickListener;
 import com.chrono.src.ui.list.adapters.multitype.MultiTypeAdapter;
 import com.github.curioustechizen.ago.RelativeTimeTextView;
 import com.greak.R;
+import com.greak.common.utils.CurrencyUtils;
 import com.greak.data.database.UserActionsPreferences;
 import com.greak.data.models.Post;
 import com.greak.ui.common.TagViewUtils;
-import com.greak.ui.common.TimeUtils;
-import com.greak.ui.screens.channel.ChannelActivity;
 import com.greak.ui.screens.post.clickhandlers.VoteHandler;
+import com.greak.ui.screens.user_profile.UserProfileActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-/**
- * Created by Filip Kowalski on 15.03.17.
- */
 
 public class PostAdapter implements MultiTypeAdapter<PostAdapter.ViewHolder, Post> {
 
@@ -45,37 +42,24 @@ public class PostAdapter implements MultiTypeAdapter<PostAdapter.ViewHolder, Pos
 	}
 
 	@Override
-	public void populateViewHolder(ViewHolder holder, final int position, final Post post) {
-		Glide.with(context).load(post.getChannel().getAvatar()).into(holder.avatar);
+	public void populateViewHolder(@NonNull ViewHolder holder, final int position, final Post post) {
+		Glide.with(context).load(post.getSteemAccount().getAvatar()).placeholder(R.drawable.ic_steem).into(holder.avatar);
 		Glide.with(context).load(post.getCoverPhoto()).into(holder.postCover);
 
 		TagViewUtils tagViewUtils = new TagViewUtils();
-		tagViewUtils.setTagViewParams(post.getChannel().getCategory(), holder.category);
-
-		TimeUtils timeUtils = new TimeUtils();
-		holder.readingTime.setText(context.getString(R.string.reading_time, timeUtils.parseReadTimeToMinutes(post
-				.getReadTime())));
+		tagViewUtils.setTagViewParams(post.getCategory(), holder.category);
 
 		boolean postLiked = UserActionsPreferences.getVotes(context).contains(post.getId());
-		holder.like.setText(String.valueOf(post.getVotesCount()));
+		holder.earnedMoney.setText(CurrencyUtils.formatCurrency(post.getMoneyEarned()));
 		final VoteHandler voteHandler = new VoteHandler(context);
-		voteHandler.changeButtonViewStyle(holder.like, postLiked);
+		voteHandler.changeButtonViewStyle(holder.earnedMoney, postLiked);
 
-		holder.containerChannel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ChannelActivity.Companion.startActivity(context, post.getChannel());
-			}
-		});
+		holder.containerChannel.setOnClickListener(v -> UserProfileActivity.Companion.startActivity(context, post.getSteemAccount()));
 		holder.timeAdded.setReferenceTime(post.getDateCreatedAsTimestamp());
 		holder.postTitle.setText(post.getTitle());
-		holder.channelName.setText(post.getChannel().getName());
-		holder.layout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onItemClick(post, position);
-			}
-		});
+		holder.authorName.setText(post.getSteemAccount().getName());
+		holder.readingTime.setText(context.getString(R.string.reading_time, post.getReadTime()));
+		holder.layout.setOnClickListener(v -> listener.onItemClick(post, position));
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
@@ -90,10 +74,10 @@ public class PostAdapter implements MultiTypeAdapter<PostAdapter.ViewHolder, Pos
 		ImageView postCover;
 
 		@BindView(R.id.text_name_channel)
-		TextView channelName;
+		TextView authorName;
 
 		@BindView(R.id.button_like_channel)
-		TextView like;
+		TextView earnedMoney;
 
 		@BindView(R.id.text_time_added_channel)
 		RelativeTimeTextView timeAdded;

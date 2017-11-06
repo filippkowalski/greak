@@ -10,20 +10,15 @@ import com.greak.R
 import com.greak.common.utils.StatsConstants
 import com.greak.data.database.UserInstance
 import com.greak.data.database.UserManager
-import com.greak.data.database.UserResolver
+import com.greak.data.models.Account
 import com.greak.ui.analytics.FabricAnalyticsManager
 import com.greak.ui.common.resolvers.OnLoginListener
+import com.greak.ui.screens.login.SignInDialogFragment
 import com.greak.ui.screens.main.MainActivity
-import com.greak.ui.screens.main.votes.VotesActivity
-import com.greak.ui.screens.post.SignInSheetViewHolder
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-/**
- * Created by Filip Kowalski on 7/16/17.
- */
 class ProfileFragment : Fragment(), OnLoginListener {
 
-    private var loginSheetHolder: SignInSheetViewHolder? = null
     private var userManager: UserManager? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -40,7 +35,6 @@ class ProfileFragment : Fragment(), OnLoginListener {
         val isUserLoggedIn = UserInstance.getInstance().isLogged
 
         initProfileData(isUserLoggedIn)
-        initLoginSheet(view!!)
         initFontSize()
         initMyVotesListener()
         initLoginOrLogout(isUserLoggedIn)
@@ -49,20 +43,10 @@ class ProfileFragment : Fragment(), OnLoginListener {
     private fun initProfileData(isUserLoggedIn: Boolean) {
         val account = UserInstance.getInstance().account
         if (!isUserLoggedIn) {
-            VisibilityUtils.hide(switch_profile_notification, text_my_votes)
             VisibilityUtils.hide(line_profile_notifications, line_profile_my_votes)
         } else if (account != null) {
             text_profile_username.text = account.username
-            switch_profile_notification.isChecked = account.notificationsEnabled
-            switch_profile_notification.setOnCheckedChangeListener { _, isChecked ->
-                FabricAnalyticsManager.logEvent(StatsConstants.NOTIFICATIONS_ENABLE, isChecked.toString())
-                userManager!!.setNotificationsEnabled(isChecked) }
         }
-    }
-
-    private fun initLoginSheet(view: View) {
-        loginSheetHolder = SignInSheetViewHolder(view, this)
-        loginSheetHolder!!.initBottomSheet()
     }
 
     private fun initFontSize() {
@@ -72,8 +56,9 @@ class ProfileFragment : Fragment(), OnLoginListener {
     }
 
     private fun initMyVotesListener() {
-        text_my_votes.setOnClickListener {
-            VotesActivity.startActivity(activity) }
+//        text_my_votes.setOnClickListener {
+//            VotesActivity.startActivity(activity)
+//        }
     }
 
     private fun changeFontSize(add: Boolean) {
@@ -87,12 +72,12 @@ class ProfileFragment : Fragment(), OnLoginListener {
 
     private fun getFontSize(add: Boolean): Int {
         val fontSize = Integer.parseInt(text_font_size.text.toString())
-        if (add && fontSize < 30) {
-            return fontSize + 1
+        return if (add && fontSize < 30) {
+            fontSize + 1
         } else if (!add && fontSize > 12) {
-            return fontSize - 1
+            fontSize - 1
         } else {
-            return fontSize
+            fontSize
         }
     }
 
@@ -102,26 +87,31 @@ class ProfileFragment : Fragment(), OnLoginListener {
     }
 
     private fun getLoginOrLogoutText(isUserLoggedIn: Boolean): String {
-        if (isUserLoggedIn) {
-            return getString(R.string.sign_out)
+        return if (isUserLoggedIn) {
+            getString(R.string.sign_out)
         } else {
-            return getString(R.string.sign_in)
+            getString(R.string.sign_in)
         }
     }
 
     private fun getLoginOrLogoutListener(isUserLoggedIn: Boolean): View.OnClickListener {
-        if (isUserLoggedIn) {
-            return View.OnClickListener {
-                UserResolver().logout(context)
+        return if (isUserLoggedIn) {
+            View.OnClickListener {
+                val userManager = UserManager(context)
+                userManager.logout()
                 restartActivity()
             }
         } else {
-            return View.OnClickListener { loginSheetHolder!!.showBottomSheet(true) }
+            View.OnClickListener {
+                SignInDialogFragment.newInstance().show(childFragmentManager, null)
+            }
         }
     }
 
-    override fun onLoginSuccessful() {
+    override fun onUserLogin(username: String) {
         restartActivity()
+        val userManager = UserManager(context)
+        userManager.account = Account(username)
     }
 
     private fun restartActivity() {

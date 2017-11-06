@@ -9,18 +9,14 @@ import android.support.v4.app.Fragment;
 import com.greak.R;
 import com.greak.data.database.UserInstance;
 import com.greak.data.models.Post;
-import com.greak.data.rest.RestService;
 import com.greak.ui.base.BaseActivity;
 import com.greak.ui.screens.main.common.FeedVoteViewHandler;
-import com.greak.ui.screens.main.discover.OnFeedRefreshListener;
+import com.greak.ui.screens.main.trending.OnFeedRefreshListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Filip Kowalski on 26.03.17.
@@ -82,18 +78,18 @@ public class PostActivity extends BaseActivity implements OnFeedRefreshListener 
 		if (notificationId != 0 && UserInstance.getInstance().isLogged()) {
 			Map<String, Boolean> map = new HashMap<>();
 			map.put("is_read", true);
-			RestService.getInstance().getApiService().setNotificationAsRead(notificationId,
-					UserInstance.getInstance().getAccount().getUsername(), map).enqueue(new Callback<Void>() {
-				@Override
-				public void onResponse(Call<Void> call, Response<Void> response) {
-					// do nothing
-				}
-
-				@Override
-				public void onFailure(Call<Void> call, Throwable t) {
-					// do nothing
-				}
-			});
+//			RestService.getInstance().getApiService().setNotificationAsRead(notificationId,
+//					UserInstance.getInstance().getAccount().getUsername(), map).enqueue(new Callback<Void>() {
+//				@Override
+//				public void onResponse(Call<Void> call, Response<Void> response) {
+//					// do nothing
+//				}
+//
+//				@Override
+//				public void onFailure(Call<Void> call, Throwable t) {
+//					// do nothing
+//				}
+//			});
 		}
 	}
 

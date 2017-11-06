@@ -6,7 +6,7 @@ android {
     buildToolsVersion '26.0.2'
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -36,10 +36,17 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
 
+    // CONCURRENCY & RX
+    ext.rxAndroidVersion = '2.0.1'
+    ext.rxJavaVersion = '2.1.5'
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+
+
     // HTTP & REST
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
     // UTILS

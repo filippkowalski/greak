@@ -8,8 +8,8 @@ import com.chrono.src.common.constants.StringConstants;
 import com.greak.R;
 import com.greak.ui.screens.main.common.DirectFragmentStatePagerAdapter;
 import com.greak.ui.screens.main.common.ScrollableToTop;
-import com.greak.ui.screens.main.discover.DiscoverListFragment;
-import com.greak.ui.screens.main.subscriptions.SubscriptionsListFragment;
+import com.greak.ui.screens.main.trending.TrendingListFragment;
+import com.greak.ui.screens.main.feed.FeedListFragment;
 import com.greak.ui.screens.profile.ProfileFragment;
 
 public class MainViewPagerAdapter extends DirectFragmentStatePagerAdapter {
@@ -30,10 +30,10 @@ public class MainViewPagerAdapter extends DirectFragmentStatePagerAdapter {
 		Fragment fragment = null;
 		switch (position) {
 			case SUBSCRIPTIONS_POSITION:
-				fragment = SubscriptionsListFragment.newInstance();
+				fragment = FeedListFragment.newInstance();
 				break;
 			case DISCOVERY_POSITION:
-				fragment = DiscoverListFragment.newInstance();
+				fragment = TrendingListFragment.newInstance();
 				break;
 			case PROFILE_POSITION:
 				fragment = ProfileFragment.Companion.newInstance();
@@ -46,9 +46,9 @@ public class MainViewPagerAdapter extends DirectFragmentStatePagerAdapter {
 	@Override
 	public CharSequence getPageTitle(int position) {
 		if (position == DISCOVERY_POSITION) {
-			return context.getString(R.string.discover);
+			return context.getString(R.string.trending);
 		} else if (position == SUBSCRIPTIONS_POSITION) {
-			return context.getString(R.string.observed);
+			return context.getString(R.string.followed);
 		} else if (position == PROFILE_POSITION) {
 			return context.getString(R.string.profile);
 		} else {

@@ -76,17 +76,19 @@
 					android:textSize="12sp"
 					tools:text="Post content"/>
 
+				<!-- TODO enable this feature in the future -->
 				<TextView
 					android:id="@+id/button_observe"
 					fontPath="@string/font_lato_bold"
 					android:layout_width="120dp"
 					android:layout_height="26dp"
+					android:visibility="gone"
 					android:layout_alignParentEnd="true"
 					android:layout_alignParentRight="true"
 					android:layout_centerVertical="true"
 					android:background="@drawable/button_rounded_100_teal"
 					android:gravity="center"
-					android:text="@string/observe"
+					android:text="@string/follow"
 					android:textColor="@color/teal_250"
 					android:textSize="12sp"/>
 			</RelativeLayout>
@@ -100,7 +102,7 @@
 
 		</LinearLayout>
 
-		<com.greak.ui.common.ObservableWebView
+		<com.greak.ui.common.ScrollableWebView
 			android:id="@+id/text_content_post"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -149,12 +151,13 @@
 			<TextView
 				android:id="@+id/button_like_post"
 				fontPath="@string/font_lato_heavy"
-				android:layout_width="74dp"
+				android:layout_width="wrap_content"
 				android:layout_height="28dp"
 				android:background="@drawable/button_grey"
-				android:drawableEnd="@drawable/ic_thumb_up_grey_18dp"
-				android:drawableRight="@drawable/ic_thumb_up_grey_18dp"
+				android:drawableEnd="@drawable/ic_money_grey_small"
+				android:drawableRight="@drawable/ic_money_grey_small"
 				android:gravity="center"
+				android:minWidth="64dp"
 				android:paddingEnd="12dp"
 				android:paddingLeft="4dp"
 				android:paddingRight="12dp"
@@ -167,24 +170,10 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"/>
-
-			<TextView
-				android:id="@+id/button_give_tip"
-				fontPath="@string/font_lato_bold"
-				android:layout_width="94dp"
-				android:layout_height="26dp"
-				android:alpha="0.5"
-				android:background="@drawable/button_rounded_100_teal"
-				android:gravity="center"
-				android:text="@string/give_tip"
-				android:textColor="@color/teal_250"
-				android:textSize="12sp"/>
 		</LinearLayout>
 
 	</RelativeLayout>
 
 	<include layout="@layout/sheet_post_cover_photo"/>
-
-	<include layout="@layout/sheet_login"/>
 
 </android.support.design.widget.CoordinatorLayout>

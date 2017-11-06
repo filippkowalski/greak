@@ -1,5 +1,5 @@
 package com.greak.ui.common.resolvers;
 
 public interface OnLoginListener {
-	void onLoginSuccessful();
+	void onUserLogin(String username);
 }

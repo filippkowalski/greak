@@ -12,31 +12,6 @@
 		android:layout_width="match_parent"
 		android:inputType="textEmailAddress"
 		android:layout_height="wrap_content"
-		android:hint="@string/email"/>
-
-	<EditText
-		android:id="@+id/edit_login_password"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:hint="@string/password"
-		android:inputType="textPassword"/>
-
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:padding="12dp"
-		android:text="@string/or"
-		android:textAllCaps="true"/>
-
-	<Button
-		android:id="@+id/button_sign_up"
-		android:layout_width="248dp"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="12dp"
-		android:layout_marginTop="8dp"
-		android:background="@drawable/button_rounded_10_teal"
-		android:padding="12dp"
-		android:text="@string/sign_up"
-		android:textColor="@color/teal_250"/>
+		android:hint="@string/username"/>
 
 </LinearLayout>

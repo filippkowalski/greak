@@ -6,21 +6,10 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.greak.R;
 import com.greak.data.database.UserActionsPreferences;
 import com.greak.data.database.UserInstance;
-import com.greak.data.models.Follow;
-import com.greak.data.rest.ApiService;
-import com.greak.data.rest.RestService;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ObserveHandler {
 
@@ -40,15 +29,15 @@ public class ObserveHandler {
 		}
 	}
 
-	public void changeButtonViewStyle(TextView button, boolean subscribed) {
-		button.setBackgroundResource(getButtonBackground(subscribed));
-		button.setText(getButtonText(subscribed));
-		button.setTextColor(ContextCompat.getColor(context, getButtonTextColor(subscribed)));
+	public void changeButtonViewStyle(TextView button, boolean followed) {
+		button.setBackgroundResource(getButtonBackground(followed));
+		button.setText(getButtonText(followed));
+		button.setTextColor(ContextCompat.getColor(context, getButtonTextColor(followed)));
 	}
 
 	@DrawableRes
-	private int getButtonBackground(boolean subscribed) {
-		if (subscribed) {
+	private int getButtonBackground(boolean followed) {
+		if (followed) {
 			return R.drawable.button_rounded_100_teal_filled;
 		} else {
 			return R.drawable.button_rounded_100_teal;
@@ -56,57 +45,23 @@ public class ObserveHandler {
 	}
 
 	@StringRes
-	private int getButtonText(boolean subscribed) {
-		if (subscribed) {
-			return R.string.observing;
+	private int getButtonText(boolean followed) {
+		if (followed) {
+			return R.string.unfollow;
 		} else {
-			return R.string.observe;
+			return R.string.follow;
 		}
 	}
 
 	@ColorRes
-	private int getButtonTextColor(boolean subscribed) {
-		if (subscribed) {
+	private int getButtonTextColor(boolean followed) {
+		if (followed) {
 			return android.R.color.white;
 		} else {
 			return R.color.teal_250;
 		}
 	}
 
-	private void observeChannel(final boolean observed, final long channelId, final TextView button) {
-		ApiService service = RestService.getInstance().getApiService();
-		if (observed) {
-			service.unfollowChannel(channelId).enqueue(new Callback<Follow>() {
-				@Override
-				public void onResponse(Call<Follow> call, Response<Follow> response) {
-					UserActionsPreferences.removeFollowedChannel(context, channelId);
-					changeButtonViewStyle(button, false);
-				}
-
-				@Override
-				public void onFailure(Call<Follow> call, Throwable t) {
-					showFailureToast();
-				}
-			});
-		} else {
-			service.followChannel(channelId).enqueue(new Callback<Follow>() {
-				@Override
-				public void onResponse(Call<Follow> call, Response<Follow> response) {
-					List<Long> channelIds = new ArrayList<>();
-					channelIds.add(channelId);
-					UserActionsPreferences.setFollowedChannels(context, channelIds);
-					changeButtonViewStyle(button, true);
-				}
-
-				@Override
-				public void onFailure(Call<Follow> call, Throwable t) {
-					showFailureToast();
-				}
-			});
-		}
-	}
-
-	private void showFailureToast() {
-		Toast.makeText(context, R.string.error_operation_failed, Toast.LENGTH_SHORT).show();
+	private void observeChannel(final boolean followed, final long channelId, final TextView button) {
 	}
 }

@@ -11,7 +11,7 @@ import java.util.TimeZone;
 public class DateUtils {
 
 	private static final String DEFAULT_APP_DATE_FORMAT = "HH:mm, dd.MM";
-	private static final String DEFAULT_SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+	private static final String DEFAULT_SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 	private static final String GMT = "GMT";
 
 	public static String convertDateStringToSimpleFormat(String dateString) {

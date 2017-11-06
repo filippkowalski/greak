@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.chrono.src.ui.list.OnItemClickListener;
 import com.chrono.src.ui.list.endless.EndlessListFragment;
@@ -12,6 +11,8 @@ import com.chrono.src.ui.states.error.ErrorView;
 import com.chrono.src.ui.states.error.StandardErrorView;
 import com.greak.R;
 import com.greak.data.database.UserInstance;
+import com.greak.data.database.UserManager;
+import com.greak.data.models.Account;
 import com.greak.data.models.FeedItem;
 import com.greak.data.models.Post;
 import com.greak.ui.common.FragmentCommunicationUtils;
@@ -21,7 +22,7 @@ import com.greak.ui.screens.main.common.OnRefreshListener;
 import com.greak.ui.screens.main.common.PostSpacingItemDecoration;
 import com.greak.ui.screens.main.common.PostsMultiAdapter;
 import com.greak.ui.screens.main.common.ScrollableToTop;
-import com.greak.ui.screens.main.subscriptions.emptystate.LoginEmptyView;
+import com.greak.ui.screens.main.feed.emptystate.LoginEmptyView;
 import com.greak.ui.screens.post.PostActivity;
 
 import java.util.List;
@@ -71,22 +72,12 @@ public class VotesListFragment extends EndlessListFragment<Post, FeedItem, Posts
 	@Override
 	protected ErrorView createErrorView() {
 		if (UserInstance.getInstance().isLogged()) {
-			return new StandardErrorView(getContext(), new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onRefresh();
-				}
-			},
+			return new StandardErrorView(getContext(), v -> onRefresh(),
 					getString(R.string.no_favorites_yet), getString(R.string.like_something),
 					getString(R.string.refresh));
 		} else {
 			return new LoginEmptyView(this);
 		}
-	}
-
-	@Override
-	public void onLoginSuccessful() {
-		refreshListener.onRefresh();
 	}
 
 	@Override
@@ -101,5 +92,12 @@ public class VotesListFragment extends EndlessListFragment<Post, FeedItem, Posts
 	@Override
 	public void scrollToTop() {
 		getRecyclerView().smoothScrollToPosition(0);
+	}
+
+	@Override
+	public void onUserLogin(String username) {
+		refreshListener.onRefresh();
+		UserManager userManager = new UserManager(getContext());
+		userManager.setAccount(new Account(username));
 	}
 }

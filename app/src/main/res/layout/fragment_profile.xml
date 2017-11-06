@@ -84,31 +84,21 @@
 			android:layout_height="0.5dp"
 			android:background="@color/line_grey"/>
 
-		<Switch
-			android:id="@+id/switch_profile_notification"
-			fontPath="@string/font_lato_regular"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?android:selectableItemBackground"
-			android:padding="12dp"
-			android:text="@string/notifications"
-			android:textColor="@color/grey_666666"/>
-
 		<View
 			android:id="@+id/line_profile_notifications"
 			android:layout_width="match_parent"
 			android:layout_height="0.5dp"
 			android:background="@color/line_grey"/>
 
-		<TextView
-			android:id="@+id/text_my_votes"
-			fontPath="@string/font_lato_regular"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?android:selectableItemBackground"
-			android:padding="12dp"
-			android:text="@string/my_votes"
-			android:textColor="@color/grey_666666"/>
+		<!--<TextView-->
+			<!--android:id="@+id/text_my_votes"-->
+			<!--fontPath="@string/font_lato_regular"-->
+			<!--android:layout_width="match_parent"-->
+			<!--android:layout_height="wrap_content"-->
+			<!--android:background="?android:selectableItemBackground"-->
+			<!--android:padding="12dp"-->
+			<!--android:text="@string/my_votes"-->
+			<!--android:textColor="@color/grey_666666"/>-->
 
 		<View
 			android:id="@+id/line_profile_my_votes"
@@ -127,7 +117,5 @@
 			android:textColor="@color/grey_666666"/>
 
 	</LinearLayout>
-
-	<include layout="@layout/sheet_login"/>
 
 </android.support.design.widget.CoordinatorLayout>

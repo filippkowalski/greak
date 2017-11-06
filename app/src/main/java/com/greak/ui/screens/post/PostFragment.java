@@ -16,31 +16,26 @@ import com.bumptech.glide.Glide;
 import com.chrono.src.common.constants.StringConstants;
 import com.chrono.src.ui.BaseFragment;
 import com.greak.R;
+import com.greak.common.utils.CurrencyUtils;
 import com.greak.common.utils.StatsConstants;
 import com.greak.data.database.UserActionsPreferences;
+import com.greak.data.database.UserManager;
+import com.greak.data.models.Account;
 import com.greak.data.models.Post;
-import com.greak.data.rest.RestService;
 import com.greak.ui.analytics.FabricAnalyticsManager;
 import com.greak.ui.common.FragmentCommunicationUtils;
-import com.greak.ui.common.ObservableWebView;
-import com.greak.ui.common.TimeUtils;
+import com.greak.ui.common.ScrollableWebView;
 import com.greak.ui.common.resolvers.OnLoginListener;
-import com.greak.ui.screens.channel.ChannelActivity;
-import com.greak.ui.screens.main.discover.OnFeedRefreshListener;
+import com.greak.ui.screens.login.SignInDialogFragment;
+import com.greak.ui.screens.main.trending.OnFeedRefreshListener;
 import com.greak.ui.screens.post.clickhandlers.ObserveHandler;
 import com.greak.ui.screens.post.clickhandlers.OnLoginRequired;
 import com.greak.ui.screens.post.clickhandlers.VoteHandler;
+import com.greak.ui.screens.user_profile.UserProfileActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-/**
- * Created by Filip Kowalski on 26.03.17.
- */
 
 public class PostFragment extends BaseFragment<PostPresenter> implements OnLoginRequired, OnLoginListener {
 
@@ -60,16 +55,13 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 	protected TextView observeButton;
 
 	@BindView(R.id.text_content_post)
-	protected ObservableWebView postContent;
+	protected ScrollableWebView postContent;
 
 	@BindView(R.id.button_comments_post)
 	protected TextView commentsCount;
 
 	@BindView(R.id.button_like_post)
-	protected TextView likeButton;
-
-	@BindView(R.id.button_give_tip)
-	protected TextView giveTip;
+	protected TextView moneyEarnedButton;
 
 	private boolean showCover;
 	private boolean finishedScrolling;
@@ -78,7 +70,6 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 	private Post post;
 	private ObserveHandler observeHandler;
 	private VoteHandler voteHandler;
-	private SignInSheetViewHolder loginSheetHolder;
 	private PostCoverSheetViewHolder coverPhotoHolder;
 
 	private OnFeedRefreshListener feedRefreshListener;
@@ -133,10 +124,13 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 
 		prepareContentWebView(htmlUtils);
 
-		channelName.setText(post.getChannel().getName());
-		channelDescription.setText(post.getChannel().getDescription());
-		likeButton.setText(String.valueOf(post.getVotesCount()));
-		Glide.with(getContext()).load(post.getChannel().getAvatar()).into(channelAvatar);
+		channelName.setText(post.getSteemAccount().getName());
+		channelDescription.setText(post.getSteemAccount().getDescription());
+		moneyEarnedButton.setText(CurrencyUtils.formatCurrency(post.getMoneyEarned()));
+		Glide.with(getContext())
+				.load(post.getSteemAccount().getAvatar())
+				.placeholder(R.drawable.ic_steem)
+				.into(channelAvatar);
 	}
 
 	private void prepareContentWebView(PostHtmlUtils htmlUtils) {
@@ -154,19 +148,15 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 		}
 
 		String content = htmlUtils.prepareHtmlStyling(getContext(), post.getTitle(), post.getContent());
-		postContent.loadDataWithBaseURL(null, content, PostHtmlUtils.Companion.getDEFAULT_MIME_TYPE(),
-				PostHtmlUtils.Companion.getDEFAULT_ENCODING(), null);
-		postContent.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-		postContent.setOnScrollChangedCallback(new ObservableWebView.OnScrollChangedCallback() {
-
-			@Override
-			public void onScroll(int scrollY, boolean clampedY) {
-				if (scrollY == 0 && finishedScrolling) {
-					coverPhotoHolder.expandSheet(true);
-					finishedScrolling = false;
-				}
-				finishedScrolling = clampedY;
+//		postContent.loadDataWithBaseURL(null, content, PostHtmlUtils.Companion.getDEFAULT_MIME_TYPE(),
+//				PostHtmlUtils.Companion.getDEFAULT_ENCODING(), null);
+		postContent.loadMarkdown(content);
+		postContent.setOnScrollChangedCallback((scrollY, clampedY) -> {
+			if (scrollY == 0 && finishedScrolling) {
+				coverPhotoHolder.expandSheet(true);
+				finishedScrolling = false;
 			}
+			finishedScrolling = clampedY;
 		});
 	}
 
@@ -175,19 +165,16 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 		voteHandler = new VoteHandler(getContext());
 
 		boolean channelObserved = UserActionsPreferences.getFollowedChannels(getContext())
-				.contains(post.getChannel().getId());
+				.contains(post.getSteemAccount().getId());
 		boolean postLiked = UserActionsPreferences.getVotes(getContext()).contains(post.getId());
 
 		observeHandler.changeButtonViewStyle(observeButton, channelObserved);
-		voteHandler.changeButtonViewStyle(likeButton, postLiked);
+		voteHandler.changeButtonViewStyle(moneyEarnedButton, postLiked);
 	}
 
 	private void initSheets(View view) {
 		coverPhotoHolder = new PostCoverSheetViewHolder(view, post);
 		coverPhotoHolder.initSheet(showCover && post.getCoverPhoto() != null);
-
-		loginSheetHolder = new SignInSheetViewHolder(view, this);
-		loginSheetHolder.initBottomSheet();
 	}
 
 	@Override
@@ -197,12 +184,12 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 
 	@OnClick(R.id.button_observe)
 	public void onObserveClicked() {
-		observeHandler.handleObserve(observeButton, post.getChannel().getId(), this);
+		observeHandler.handleObserve(observeButton, post.getSteemAccount().getId(), this);
 	}
 
 	@OnClick({R.id.image_channel_avatar, R.id.text_name_channel, R.id.text_description_channel})
 	public void onChannelClicked() {
-		ChannelActivity.Companion.startActivity(getContext(), post.getChannel());
+		UserProfileActivity.Companion.startActivity(getContext(), post.getSteemAccount());
 	}
 
 	@OnClick(R.id.button_comments_post)
@@ -212,42 +199,12 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 
 	@OnClick(R.id.button_like_post)
 	public void onLikePostClicked() {
-		voteHandler.handleVote(likeButton, post.getId(), this, feedRefreshListener);
-	}
-
-	@OnClick(R.id.button_give_tip)
-	public void onGiveTipClicked() {
-		Toast.makeText(getContext(), "Funkcja jeszcze nie gotowa.", Toast.LENGTH_SHORT).show();
+		voteHandler.handleVote(moneyEarnedButton, post.getId(), this, feedRefreshListener);
 	}
 
 	@Override
 	public void onLoginRequired() {
-		loginSheetHolder.showBottomSheet(true);
-	}
-
-	@Override
-	public void onLoginSuccessful() {
-		loginSheetHolder.showBottomSheet(false);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		TimeUtils timeUtils = new TimeUtils();
-		RestService.getInstance()
-				.getApiService()
-				.sendReadingTime(post.getId(), timeUtils.getTimeAsHHMMSS(System.currentTimeMillis() - readingStartTime))
-				.enqueue(new Callback<Post>() {
-					@Override
-					public void onResponse(Call<Post> call, Response<Post> response) {
-						// do nothing
-					}
-
-					@Override
-					public void onFailure(Call<Post> call, Throwable t) {
-						// do nothing
-					}
-				});
+		SignInDialogFragment.newInstance().show(getChildFragmentManager(), null);
 	}
 
 	@Override
@@ -255,5 +212,11 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 		outState.putParcelable(BUNDLE_POST, post);
 		outState.putBoolean(BUNDLE_SHOW_COVER, showCover);
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onUserLogin(String username) {
+		UserManager userManager = new UserManager(getContext());
+		userManager.setAccount(new Account(username));
 	}
 }
