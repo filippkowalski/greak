@@ -25,13 +25,12 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : Fragment(), OnLoginListener {
     private var userManager: UserManager? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater!!.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         FabricAnalyticsManager.logEvent(StatsConstants.PROFILE, null)
 
@@ -134,7 +133,7 @@ class ProfileFragment : Fragment(), OnLoginListener {
     }
 
     private fun restartActivity() {
-        activity.finish()
+        activity!!.finish()
         MainActivity.startActivity(activity)
     }
 

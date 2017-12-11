@@ -37,10 +37,9 @@
 			android:name="com.greak.ui.screens.main.votes.VotesActivity"
 			android:launchMode="singleTop"/>
 
-		<meta-data
-			android:name="io.fabric.ApiKey"
-			android:value="554d225e5642a5bdc30494682dd49e678af1512b"/>
-
-	</application>
+	    <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="554d225e5642a5bdc30494682dd49e678af1512b" />
+    </application>
 
 </manifest>

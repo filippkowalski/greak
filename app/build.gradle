@@ -1,39 +1,39 @@
 buildscript {
 
     repositories {
-        maven { url 'https://maven.fabric.io/public' }
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.25.1'
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'io.fabric'
 apply plugin: 'com.jakewharton.hugo'
 
 repositories {
-    maven { url 'https://maven.fabric.io/public' }
     maven { url 'https://jitpack.io' }
     mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 
 android {
     signingConfigs {
     }
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.greak"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
-        versionName "1.0.0"
+        versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions {
@@ -43,7 +43,7 @@ android {
     buildTypes {
         release {
             debuggable false
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -77,7 +77,7 @@ android {
     }
 }
 
-ext.supportVersion = '26.1.0'
+ext.supportVersion = '27.0.2'
 ext.ankoVersion = '0.10.1'
 
 dependencies {
@@ -147,6 +147,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
     compile('com.crashlytics.sdk.android:answers:1.4.1@aar') {
-        transitive = true;
+        transitive = true
     }
 }
