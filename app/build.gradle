@@ -22,7 +22,6 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-
 android {
     signingConfigs {
     }
@@ -148,5 +147,10 @@ dependencies {
     }
     compile('com.crashlytics.sdk.android:answers:1.4.1@aar') {
         transitive = true
+    }
+    configurations {
+        all {
+            exclude module: 'httpclient'
+        }
     }
 }
