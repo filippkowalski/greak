@@ -80,7 +80,7 @@ public class FeedService {
 		post.setCommentsCount(commentFeedEntry.getReblogBy().size());
 		TimePointSec created = comment.getCreated();
 		post.setDateCreated(created.getDateTime());
-		post.setCategory(new Category(comment.getCategory(), "#000000", "#ffffff"));
+		post.setCategory(new Category(comment.getCategory()));
 		post.setReadTime(calculateReadingTimeInMinutes(comment.getBody()));
 		post.setMoneyEarned(SteemCurrencyCalculator.getEarnedMoney(comment, rewardFund, currentMedianHistoryPrice));
 

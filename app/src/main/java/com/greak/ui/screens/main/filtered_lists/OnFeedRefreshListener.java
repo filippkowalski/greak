@@ -1,4 +1,4 @@
-package com.greak.ui.screens.main.trending;
+package com.greak.ui.screens.main.filtered_lists;
 
 public interface OnFeedRefreshListener {
 

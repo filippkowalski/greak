@@ -64,7 +64,11 @@ public class PostWithoutPhotoAdapter implements MultiTypeAdapter<PostWithoutPhot
 		holder.containerChannel.setOnClickListener(v -> UserProfileActivity.Companion.startActivity(context, post.getSteemAccount()));
 		holder.timeAdded.setReferenceTime(post.getDateCreatedAsTimestamp());
 		holder.postTitle.setText(post.getTitle());
-		String content = post.getContent().replaceAll("<img.+?>", StringConstants.EMPTY);
+		String content = post.getContent()
+				.replaceAll("<img.+?>", StringConstants.EMPTY)
+				.replaceAll("\\[", StringConstants.EMPTY)
+				.replaceAll("]", StringConstants.EMPTY)
+				.replaceAll("\\(https.*?\\)", StringConstants.EMPTY);
 		holder.postContent.setText(post.getTeaser() != null ? Html.fromHtml(post.getTeaser()) : Html.fromHtml(content));
 		holder.channelName.setText(post.getSteemAccount().getName());
 		holder.layout.setOnClickListener(v -> listener.onItemClick(post, position));

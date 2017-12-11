@@ -37,10 +37,10 @@ public class Category implements FeedItem, Parcelable {
 	private List<Post> posts = new ArrayList<>();
 
 	// TODO tmp constructor
-	public Category(String name, String color, String fontColor) {
+	public Category(String name) {
 		this.name = name;
-		this.color = color;
-		this.fontColor = fontColor;
+		this.color = "#06d1a5";
+		this.fontColor = "#ffffff";
 	}
 
 	@Override

@@ -1,7 +1,8 @@
-package com.greak.ui.screens.main.trending;
+package com.greak.ui.screens.main.filtered_lists;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.chrono.src.ui.list.OnItemClickListener;
@@ -10,22 +11,28 @@ import com.chrono.src.ui.list.endless.EndlessListFragment;
 import com.greak.data.models.FeedItem;
 import com.greak.data.models.Post;
 import com.greak.ui.screens.main.common.FeedVoteViewHandler;
+import com.greak.ui.screens.main.common.ListType;
 import com.greak.ui.screens.main.common.PostsMultiAdapter;
 import com.greak.ui.screens.main.common.ScrollableToTop;
 import com.greak.ui.screens.post.PostActivity;
 
 import java.util.List;
 
-public class TrendingListFragment extends EndlessListFragment<Post, FeedItem, PostsMultiAdapter>
+public class FilteredListFragment extends EndlessListFragment<Post, FeedItem, PostsMultiAdapter>
 		implements ScrollableToTop, OnItemClickListener<Post> {
 
-	public static TrendingListFragment newInstance() {
-		return new TrendingListFragment();
-	}
+	private static final String ARGS_LIST_TYPE = "list_type";
 
+	public static FilteredListFragment newInstance(@ListType int listType) {
+		Bundle args = new Bundle();
+		args.putInt(ARGS_LIST_TYPE, listType);
+		FilteredListFragment fragment = new FilteredListFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
 	@Override
-	public TrendingListPresenter createPresenter() {
-		return new TrendingListPresenter(this);
+	public FilteredListPresenter createPresenter() {
+		return new FilteredListPresenter(getArguments().getInt(ARGS_LIST_TYPE), this);
 	}
 
 	@Override
@@ -59,6 +66,6 @@ public class TrendingListFragment extends EndlessListFragment<Post, FeedItem, Po
 
 	@Override
 	public void onItemClick(Post post, int position) {
-		PostActivity.startActivityForResult(TrendingListFragment.this, post, false, position);
+		PostActivity.startActivityForResult(FilteredListFragment.this, post, false, position);
 	}
 }

@@ -27,7 +27,7 @@ import com.greak.ui.common.FragmentCommunicationUtils;
 import com.greak.ui.common.ScrollableWebView;
 import com.greak.ui.common.resolvers.OnLoginListener;
 import com.greak.ui.screens.login.SignInDialogFragment;
-import com.greak.ui.screens.main.trending.OnFeedRefreshListener;
+import com.greak.ui.screens.main.filtered_lists.OnFeedRefreshListener;
 import com.greak.ui.screens.post.clickhandlers.ObserveHandler;
 import com.greak.ui.screens.post.clickhandlers.OnLoginRequired;
 import com.greak.ui.screens.post.clickhandlers.VoteHandler;

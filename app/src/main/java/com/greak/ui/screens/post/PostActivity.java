@@ -11,7 +11,7 @@ import com.greak.data.database.UserInstance;
 import com.greak.data.models.Post;
 import com.greak.ui.base.BaseActivity;
 import com.greak.ui.screens.main.common.FeedVoteViewHandler;
-import com.greak.ui.screens.main.trending.OnFeedRefreshListener;
+import com.greak.ui.screens.main.filtered_lists.OnFeedRefreshListener;
 
 import java.util.HashMap;
 import java.util.Map;

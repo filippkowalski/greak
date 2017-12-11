@@ -1,9 +1,10 @@
-package com.greak.ui.screens.main.trending;
+package com.greak.ui.screens.main.filtered_lists;
 
 import com.chrono.src.ui.list.ListViewLogic;
 import com.chrono.src.ui.list.endless.EndlessListPresenter;
-import com.greak.data.converters.TrendingService;
+import com.greak.data.converters.FilteredListService;
 import com.greak.data.models.Post;
+import com.greak.ui.screens.main.common.ListType;
 
 import java.util.ArrayList;
 
@@ -12,10 +13,14 @@ import eu.bittrade.libs.steemj.exceptions.SteemResponseException;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-class TrendingListPresenter extends EndlessListPresenter<Post> {
+class FilteredListPresenter extends EndlessListPresenter<Post> {
 
-	TrendingListPresenter(ListViewLogic<Post> contract) {
+	@ListType
+	private int listType;
+
+	FilteredListPresenter(int listType, ListViewLogic<Post> contract) {
 		super(contract);
+		this.listType = listType;
 	}
 
 	@Override
@@ -26,9 +31,9 @@ class TrendingListPresenter extends EndlessListPresenter<Post> {
 	}
 
 	private void handleDataDownload() {
-		TrendingService trendingService = new TrendingService();
+		FilteredListService filteredListService = new FilteredListService(listType);
 		try {
-			trendingService.getData()
+			filteredListService.getData()
 					.subscribeOn(Schedulers.io())
 					.observeOn(AndroidSchedulers.mainThread())
 					.doOnNext(this::handleOnResponse)

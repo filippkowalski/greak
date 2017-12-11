@@ -44,4 +44,5 @@
 	<string name="not_logged">Not logged</string>
 	<string name="sign_out">Sign out</string>
 	<string name="terms_must_be_accepted">Terms must be accepted</string>
+	<string name="new_list">New</string>
 </resources>

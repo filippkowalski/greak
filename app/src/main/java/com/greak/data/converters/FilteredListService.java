@@ -8,6 +8,7 @@ import com.greak.data.models.Category;
 import com.greak.data.models.Post;
 import com.greak.data.models.PostWithoutPhoto;
 import com.greak.data.models.SteemAccount;
+import com.greak.ui.screens.main.common.ListType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,11 +31,17 @@ import eu.bittrade.libs.steemj.exceptions.SteemCommunicationException;
 import eu.bittrade.libs.steemj.exceptions.SteemResponseException;
 import io.reactivex.Observable;
 
-public class TrendingService {
+public class FilteredListService {
 
+	@ListType
+	private final int listType;
 	private SteemJ steemJ;
 	private RewardFund rewardFund;
 	private Price currentMedianHistoryPrice;
+
+	public FilteredListService(int listType) {
+		this.listType = listType;
+	}
 
 	public Observable<List<Post>> getData() throws SteemResponseException, SteemCommunicationException {
 		return Observable.create(e -> e.onNext(prepareData()));
@@ -48,7 +55,7 @@ public class TrendingService {
 		List<Post> posts = new ArrayList<>();
 		DiscussionQuery discussionQuery = new DiscussionQuery();
 		discussionQuery.setLimit(10);
-		List<Discussion> discussionList = steemJ.getDiscussionsBy(discussionQuery, DiscussionSortType.GET_DISCUSSIONS_BY_TRENDING);
+		List<Discussion> discussionList = steemJ.getDiscussionsBy(discussionQuery, getDiscussionSortType());
 		for (Discussion discussion : discussionList) {
 			String coverPhotoUrl = null; //TODO
 			Post post = getPostInstance(coverPhotoUrl);
@@ -58,22 +65,34 @@ public class TrendingService {
 			post.setCommentsCount(discussion.getRebloggedBy().size());
 			TimePointSec created = discussion.getCreated();
 			post.setDateCreated(created.getDateTime());
-			post.setCategory(new Category(discussion.getCategory(), "#000000", "#ffffff"));
+				post.setCategory(new Category(discussion.getCategory()));
 			post.setReadTime(calculateReadingTimeInMinutes(discussion.getBody()));
 			post.setMoneyEarned(SteemCurrencyCalculator.getEarnedMoney(discussion, rewardFund, currentMedianHistoryPrice));
 
 			AccountName accountName = discussion.getAuthor();
 			ExtendedAccount extendedAccount = getExtendedAccount(accountName);
-			JSONObject profileJson = new JSONObject(extendedAccount.getJsonMetadata());
+			if (!extendedAccount.getJsonMetadata().isEmpty()) { // TODO meh, why some posts doesnt have those metadata?
+				JSONObject profileJson = new JSONObject(extendedAccount.getJsonMetadata());
 
-			SteemProfileConverter steemProfileConverter = new SteemProfileConverter(accountName);
-			SteemAccount steemAccount = steemProfileConverter.getSteemAccount(profileJson);
-			steemAccount.setPostCount((int) extendedAccount.getPostCount());
+				SteemProfileConverter steemProfileConverter = new SteemProfileConverter(accountName);
+				SteemAccount steemAccount = steemProfileConverter.getSteemAccount(profileJson);
+				steemAccount.setPostCount((int) extendedAccount.getPostCount());
 
-			post.setSteemAccount(steemAccount);
-			posts.add(post);
+				post.setSteemAccount(steemAccount);
+				posts.add(post);
+			}
 		}
 		return posts;
+	}
+
+	private DiscussionSortType getDiscussionSortType() {
+		switch (listType) {
+			case ListType.TYPE_NEW:
+				return DiscussionSortType.GET_DISCUSSIONS_BY_CREATED;
+			case ListType.TYPE_TRENDING:
+			default:
+				return DiscussionSortType.GET_DISCUSSIONS_BY_TRENDING;
+		}
 	}
 
 	// TODO below methods are duplicated in FeedService

@@ -1,4 +1,4 @@
-package com.greak.ui.screens.main.trending.adapters;
+package com.greak.ui.screens.main.filtered_lists.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +13,7 @@ import com.chrono.src.ui.list.adapters.multitype.MultiTypeAdapter;
 import com.greak.R;
 import com.greak.data.models.Categories;
 import com.greak.data.models.Category;
-import com.greak.ui.screens.main.trending.adapters.horizontal.HorizontalCategoryAdapter;
+import com.greak.ui.screens.main.filtered_lists.adapters.horizontal.HorizontalCategoryAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

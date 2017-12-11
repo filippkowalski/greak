@@ -1,4 +1,4 @@
-package com.greak.ui.screens.main.trending.adapters.horizontal;
+package com.greak.ui.screens.main.filtered_lists.adapters.horizontal;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.chrono.src.ui.list.OnItemClickListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.greak.R;
-import com.greak.data.models.Category;
+import com.greak.data.models.SteemAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,42 +20,43 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HorizontalCategoryAdapter extends RecyclerView.Adapter<HorizontalCategoryAdapter.ViewHolder> {
+public class HorizontalChannelAdapter extends RecyclerView.Adapter<HorizontalChannelAdapter.ViewHolder> {
 
 	private Context context;
-	private List<Category> categories = new ArrayList<>();
-	private OnItemClickListener<Category> listener;
+	private List<SteemAccount> steemAccounts = new ArrayList<>();
+	private OnItemClickListener<SteemAccount> listener;
 
-	public HorizontalCategoryAdapter(Context context, List<Category> categories, OnItemClickListener<Category>
+	public HorizontalChannelAdapter(Context context, List<SteemAccount> steemAccounts, OnItemClickListener<SteemAccount>
 			listener) {
 		this.context = context;
-		this.categories = categories;
+		this.steemAccounts = steemAccounts;
 		this.listener = listener;
 	}
 
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_horizontal, parent, false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_channel_horizontal, parent, false);
 		return new ViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(ViewHolder holder, final int position) {
-		final Category category = categories.get(position);
+		final SteemAccount steemAccount = steemAccounts.get(position);
 
-		Glide.with(context).load(category.getCoverPhoto()).into(holder.cover);
-		holder.name.setText(category.getName());
+		Glide.with(context).load(steemAccount.getCoverPhoto()).into(holder.cover);
+		holder.name.setText(steemAccount.getName());
+		holder.description.setText(steemAccount.getDescription());
 		holder.layout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onItemClick(category, position);
+				listener.onItemClick(steemAccount, position);
 			}
 		});
 	}
 
 	@Override
 	public int getItemCount() {
-		return categories.size();
+		return steemAccounts.size();
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,8 +64,11 @@ public class HorizontalCategoryAdapter extends RecyclerView.Adapter<HorizontalCa
 		@BindView(R.id.image_post_element_cover)
 		RoundedImageView cover;
 
-		@BindView(R.id.text_category_name_horizontal_item)
+		@BindView(R.id.text_channel_name_horizontal_item)
 		TextView name;
+
+		@BindView(R.id.text_channel_description_horizontal_item)
+		TextView description;
 
 		@BindView(R.id.layout_item_horizontal)
 		CardView layout;

@@ -1,4 +1,4 @@
-package com.greak.ui.screens.main.trending.adapters;
+package com.greak.ui.screens.main.filtered_lists.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

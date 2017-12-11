@@ -5,7 +5,7 @@ import android.content.Context;
 import com.chrono.src.ui.list.OnItemClickListener;
 import com.chrono.src.ui.list.adapters.multitype.MultiTypeRecyclerAdapter;
 import com.greak.data.models.SteemAccount;
-import com.greak.ui.screens.main.trending.adapters.DiscoverChannelAdapter;
+import com.greak.ui.screens.main.filtered_lists.adapters.DiscoverChannelAdapter;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.greak.ui.screens.main.trending.adapters;
+package com.greak.ui.screens.main.filtered_lists.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -6,33 +6,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.chrono.src.ui.list.OnItemClickListener;
 import com.chrono.src.ui.list.adapters.multitype.MultiTypeAdapter;
 import com.greak.R;
-import com.greak.data.models.SteemAccount;
-import com.greak.data.models.Channels;
-import com.greak.ui.screens.main.trending.adapters.horizontal.HorizontalChannelAdapter;
+import com.greak.data.models.Post;
+import com.greak.data.models.Posts;
+import com.greak.ui.screens.main.filtered_lists.adapters.horizontal.HorizontalPostAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DiscoverChannelsAdapter implements MultiTypeAdapter<DiscoverChannelsAdapter.ViewHolder, Channels> {
+public class DiscoverPostsAdapter implements MultiTypeAdapter<DiscoverPostsAdapter.ViewHolder, Posts> {
 
 	private Context context;
-	private OnItemClickListener<SteemAccount> listener;
+	private OnItemClickListener<Post> listener;
 
-	public DiscoverChannelsAdapter(Context context, OnItemClickListener<SteemAccount> listener) {
+	public DiscoverPostsAdapter(Context context, OnItemClickListener<Post> listener) {
 		this.context = context;
 		this.listener = listener;
 	}
 
 	@Override
-	public void populateViewHolder(ViewHolder holder, int i, Channels channels) {
-		holder.title.setText(channels.getHeaderTitle());
+	public void populateViewHolder(ViewHolder holder, int i, Posts posts) {
 		holder.horizontalList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-		holder.horizontalList.setAdapter(new HorizontalChannelAdapter(context, channels.getSteemAccounts(), listener));
+		holder.horizontalList.setAdapter(new HorizontalPostAdapter(context, posts.getPosts(), listener));
 	}
 
 	@Override
@@ -43,9 +41,6 @@ public class DiscoverChannelsAdapter implements MultiTypeAdapter<DiscoverChannel
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
-
-		@BindView(R.id.text_title_item_horizontal)
-		TextView title;
 
 		@BindView(R.id.recycler_view_horizontal_list)
 		RecyclerView horizontalList;

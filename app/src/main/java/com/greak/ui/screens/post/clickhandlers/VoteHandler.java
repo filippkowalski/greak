@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.greak.R;
 import com.greak.data.database.UserActionsPreferences;
 import com.greak.data.database.UserInstance;
-import com.greak.ui.screens.main.trending.OnFeedRefreshListener;
+import com.greak.ui.screens.main.filtered_lists.OnFeedRefreshListener;
 
 public class VoteHandler {
 

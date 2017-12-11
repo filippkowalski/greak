@@ -13,7 +13,7 @@
 		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="80dp"
-			android:background="#dd2467">
+			android:background="@color/color_accent">
 
 			<TextView
 				android:id="@+id/text_profile_username"
@@ -59,7 +59,8 @@
 				android:layout_height="wrap_content"
 				android:background="?android:selectableItemBackground"
 				android:padding="6dp"
-				android:src="@drawable/ic_remove_accent_24dp"/>
+				android:src="@drawable/ic_remove_accent_24dp"
+				android:tint="@color/color_accent"/>
 
 			<TextView
 				android:id="@+id/text_font_size"
@@ -75,7 +76,8 @@
 				android:layout_height="wrap_content"
 				android:background="?android:selectableItemBackground"
 				android:padding="6dp"
-				android:src="@drawable/ic_add_accent_24dp"/>
+				android:src="@drawable/ic_add_accent_24dp"
+				android:tint="@color/color_accent"/>
 
 		</LinearLayout>
 
@@ -91,14 +93,14 @@
 			android:background="@color/line_grey"/>
 
 		<!--<TextView-->
-			<!--android:id="@+id/text_my_votes"-->
-			<!--fontPath="@string/font_lato_regular"-->
-			<!--android:layout_width="match_parent"-->
-			<!--android:layout_height="wrap_content"-->
-			<!--android:background="?android:selectableItemBackground"-->
-			<!--android:padding="12dp"-->
-			<!--android:text="@string/my_votes"-->
-			<!--android:textColor="@color/grey_666666"/>-->
+		<!--android:id="@+id/text_my_votes"-->
+		<!--fontPath="@string/font_lato_regular"-->
+		<!--android:layout_width="match_parent"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:background="?android:selectableItemBackground"-->
+		<!--android:padding="12dp"-->
+		<!--android:text="@string/my_votes"-->
+		<!--android:textColor="@color/grey_666666"/>-->
 
 		<View
 			android:id="@+id/line_profile_my_votes"

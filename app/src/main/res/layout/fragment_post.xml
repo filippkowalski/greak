@@ -157,7 +157,7 @@
 				android:drawableEnd="@drawable/ic_money_grey_small"
 				android:drawableRight="@drawable/ic_money_grey_small"
 				android:gravity="center"
-				android:minWidth="64dp"
+				android:minWidth="80dp"
 				android:paddingEnd="12dp"
 				android:paddingLeft="4dp"
 				android:paddingRight="12dp"
