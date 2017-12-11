@@ -1,6 +1,8 @@
 <resources>
-	<string name="app_name" translatable="false">Greak</string>
-	<string name="zero" translatable="false">0</string>
+	<string name="app_name"
+	        translatable="false">Greak</string>
+	<string name="zero"
+	        translatable="false">0</string>
 	<string name="read">Read</string>
 	<string name="subscribe">Subscribe | $4.99</string>
 	<string name="trending">Trending</string>
@@ -45,4 +47,12 @@
 	<string name="sign_out">Sign out</string>
 	<string name="terms_must_be_accepted">Terms must be accepted</string>
 	<string name="new_list">New</string>
+	<string name="not_ready_yet">Not ready yet</string>
+	<string name="logged_in_successfully">Logged In successfully</string>
+	<string name="failed_to_login">Failed to login</string>
+	<string name="logging_in_footer">We care about your data security and we, as Greak developers don\'t use your
+		password in any way.
+		\n\nTo ensure that, the app is not obfuscated, so you can verify that by unzipping and checking it\'s code.
+		\n\nAdditionally, this project is open sourced and available on
+		<a href="https://github.com/filippkowalski/greak">Greak GitHub</a>.</string>
 </resources>

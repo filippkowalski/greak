@@ -75,9 +75,9 @@ public class UserActionsPreferences {
 	}
 
 	@DebugLog
-	public static void setVotes(Context context, List<Long> postIds) {
+	public static void setVotes(Context context, List<String> postLinks) {
 		Set<String> likedPost = getVotesFromPrefs(context);
-		for (Long postId : postIds) {
+		for (String postId : postLinks) {
 			likedPost.add(String.valueOf(postId));
 		}
 
@@ -86,10 +86,10 @@ public class UserActionsPreferences {
 		preferencesEditor.apply();
 	}
 
-	public static void removeVote(Context context, long postId) {
+	public static void removeVote(Context context, String postLink) {
 		Set<String> likedPosts = getVotesFromPrefs(context);
 
-		likedPosts.remove(String.valueOf(postId));
+		likedPosts.remove(postLink);
 
 		SharedPreferences.Editor preferencesEditor = getSharedPreferences(context).edit();
 		preferencesEditor.putStringSet(KEY_VOTES, likedPosts);

@@ -83,6 +83,7 @@ public class FeedService {
 		post.setCategory(new Category(comment.getCategory()));
 		post.setReadTime(calculateReadingTimeInMinutes(comment.getBody()));
 		post.setMoneyEarned(SteemCurrencyCalculator.getEarnedMoney(comment, rewardFund, currentMedianHistoryPrice));
+		post.setPermlink(comment.getPermlink().getLink());
 
 		AccountName accountName = comment.getAuthor();
 		ExtendedAccount extendedAccount = getExtendedAccount(accountName);

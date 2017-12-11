@@ -8,19 +8,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.chrono.src.ui.list.OnItemClickListener;
 import com.chrono.src.ui.list.adapters.headerFooterAdapter.RecyclerViewHeaderFooterAdapter;
 import com.chrono.src.ui.list.endless.EndlessListFragment;
 import com.greak.R;
 import com.greak.common.utils.StatsConstants;
-import com.greak.data.database.UserManager;
-import com.greak.data.models.Account;
 import com.greak.data.models.Post;
 import com.greak.data.models.SteemAccount;
 import com.greak.ui.analytics.FabricAnalyticsManager;
 import com.greak.ui.common.resolvers.OnLoginListener;
 import com.greak.ui.screens.login.SignInDialogFragment;
+import com.greak.ui.screens.main.MainActivity;
 import com.greak.ui.screens.main.common.FeedVoteViewHandler;
 import com.greak.ui.screens.post.PostActivity;
 import com.greak.ui.screens.post.clickhandlers.OnLoginRequired;
@@ -30,11 +30,12 @@ import java.util.List;
 import eu.bittrade.libs.steemj.base.models.AccountName;
 
 public class UserProfilePageFragment extends EndlessListFragment<Post, Post,
-		RecyclerViewHeaderFooterAdapter<Post, UserProfileSummaryMultiAdapter>> implements OnItemClickListener<Post>,
-		OnLoginRequired, OnLoginListener {
+		RecyclerViewHeaderFooterAdapter<Post, UserProfileSummaryMultiAdapter>> implements
+		OnItemClickListener<Post>, OnLoginRequired, OnLoginListener, UserProfileView {
 
 	private static final String BUNDLE_USER_PROFILE = "user_profile";
 	private SteemAccount steemAccount;
+	private UserProfilePresenter presenter;
 
 	public static UserProfilePageFragment newInstance(SteemAccount steemAccount) {
 		Bundle args = new Bundle();
@@ -65,7 +66,9 @@ public class UserProfilePageFragment extends EndlessListFragment<Post, Post,
 
 	@Override
 	public UserProfilePresenter createPresenter() {
-		return new UserProfilePresenter(new AccountName(steemAccount.getName()), this);
+		presenter = new UserProfilePresenter(new AccountName(steemAccount.getName()), this);
+		presenter.setView(this);
+		return presenter;
 	}
 
 	@Override
@@ -118,8 +121,22 @@ public class UserProfilePageFragment extends EndlessListFragment<Post, Post,
 	}
 
 	@Override
-	public void onUserLogin(String username) {
-		UserManager userManager = new UserManager(getContext());
-		userManager.setAccount(new Account(username));
+	public void onUserLogin(String username, String password) {
+		presenter.onUserLogin(getContext(), username, password);
+	}
+
+	@Override
+	public void onUserLoggedIn(boolean loggedInSuccessfully) {
+		if (loggedInSuccessfully) {
+			Toast.makeText(getContext(), R.string.logged_in_successfully, Toast.LENGTH_SHORT).show();
+			restartActivity();
+		} else {
+			Toast.makeText(getContext(), R.string.failed_to_login, Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void restartActivity() {
+		getActivity().finish();
+		MainActivity.startActivity(getContext());
 	}
 }

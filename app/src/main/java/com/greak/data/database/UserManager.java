@@ -17,6 +17,7 @@ import hugo.weaving.DebugLog;
 public class UserManager {
 
 	private static final String USERNAME = "USERNAME";
+	private static final String POSTING_PRIVATE_KEY = "POSTING_PRIVATE_KEY";
 	private static final String FONT_SIZE = "FONT_SIZE";
 
 	private Context context;
@@ -45,6 +46,7 @@ public class UserManager {
 
 		SharedPreferences.Editor preferencesEditor = getSharedPreferences().edit();
 		preferencesEditor.putString(USERNAME, account.getUsername());
+		preferencesEditor.putString(POSTING_PRIVATE_KEY, account.getPostingPrivateKey());
 		preferencesEditor.apply();
 
 		initializeUser();
@@ -61,9 +63,10 @@ public class UserManager {
 	public Account getAccount() {
 		SharedPreferences preferences = getSharedPreferences();
 		String username = preferences.getString(USERNAME, StringConstants.EMPTY);
+		String postingPrivateKey = preferences.getString(POSTING_PRIVATE_KEY, StringConstants.EMPTY);
 		Account account = null;
 		if (!username.isEmpty()) {
-			account = new Account(username);
+			account = new Account(username, postingPrivateKey);
 		}
 		return account;
 	}
@@ -81,6 +84,7 @@ public class UserManager {
 	public void logout() {
 		SharedPreferences.Editor preferencesEditor = getSharedPreferences().edit();
 		preferencesEditor.remove(USERNAME);
+		preferencesEditor.remove(POSTING_PRIVATE_KEY);
 		preferencesEditor.apply();
 
 		UserInstance.getInstance().logout();

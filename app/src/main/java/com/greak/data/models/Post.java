@@ -26,6 +26,7 @@ public class Post implements Parcelable, FeedItem {
 	private Double moneyEarned;
 	private Category category;
 	private int readTime;
+	private String permlink;
 
 	public int getReadTime() {
 		if (readTime <= 0) {
@@ -64,6 +65,7 @@ public class Post implements Parcelable, FeedItem {
 		dest.writeValue(this.moneyEarned);
 		dest.writeParcelable(this.category, flags);
 		dest.writeInt(this.readTime);
+		dest.writeString(this.permlink);
 	}
 
 	protected Post(Parcel in) {
@@ -79,6 +81,7 @@ public class Post implements Parcelable, FeedItem {
 		this.moneyEarned = (Double) in.readValue(Double.class.getClassLoader());
 		this.category = in.readParcelable(Category.class.getClassLoader());
 		this.readTime = in.readInt();
+		this.permlink = in.readString();
 	}
 
 	public static final Creator<Post> CREATOR = new Creator<Post>() {

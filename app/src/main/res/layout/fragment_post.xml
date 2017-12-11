@@ -149,7 +149,7 @@
 				android:textSize="12sp"/>
 
 			<TextView
-				android:id="@+id/button_like_post"
+				android:id="@+id/button_vote_post"
 				fontPath="@string/font_lato_heavy"
 				android:layout_width="wrap_content"
 				android:layout_height="28dp"

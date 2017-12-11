@@ -19,14 +19,13 @@ import com.greak.R;
 import com.greak.common.utils.CurrencyUtils;
 import com.greak.common.utils.StatsConstants;
 import com.greak.data.database.UserActionsPreferences;
-import com.greak.data.database.UserManager;
-import com.greak.data.models.Account;
 import com.greak.data.models.Post;
 import com.greak.ui.analytics.FabricAnalyticsManager;
 import com.greak.ui.common.FragmentCommunicationUtils;
 import com.greak.ui.common.ScrollableWebView;
 import com.greak.ui.common.resolvers.OnLoginListener;
 import com.greak.ui.screens.login.SignInDialogFragment;
+import com.greak.ui.screens.main.MainActivity;
 import com.greak.ui.screens.main.filtered_lists.OnFeedRefreshListener;
 import com.greak.ui.screens.post.clickhandlers.ObserveHandler;
 import com.greak.ui.screens.post.clickhandlers.OnLoginRequired;
@@ -37,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PostFragment extends BaseFragment<PostPresenter> implements OnLoginRequired, OnLoginListener {
+public class PostFragment extends BaseFragment<PostPresenter> implements OnLoginRequired, OnLoginListener, PostView {
 
 	private static final String BUNDLE_POST = "post";
 	private static final String BUNDLE_SHOW_COVER = "show_cover";
@@ -60,7 +59,7 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 	@BindView(R.id.button_comments_post)
 	protected TextView commentsCount;
 
-	@BindView(R.id.button_like_post)
+	@BindView(R.id.button_vote_post)
 	protected TextView moneyEarnedButton;
 
 	private boolean showCover;
@@ -110,6 +109,7 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		getPresenter().setView(this);
 		readingStartTime = System.currentTimeMillis();
 	}
 
@@ -194,12 +194,12 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 
 	@OnClick(R.id.button_comments_post)
 	public void onCommentsClicked() {
-		Toast.makeText(getContext(), "Funkcja jeszcze nie gotowa.", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getContext(), R.string.not_ready_yet, Toast.LENGTH_SHORT).show();
 	}
 
-	@OnClick(R.id.button_like_post)
-	public void onLikePostClicked() {
-		voteHandler.handleVote(moneyEarnedButton, post.getId(), this, feedRefreshListener);
+	@OnClick(R.id.button_vote_post)
+	public void onVotePostClicked() {
+		voteHandler.handleVote(moneyEarnedButton, post.getPermlink(), this, feedRefreshListener);
 	}
 
 	@Override
@@ -215,8 +215,22 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 	}
 
 	@Override
-	public void onUserLogin(String username) {
-		UserManager userManager = new UserManager(getContext());
-		userManager.setAccount(new Account(username));
+	public void onUserLogin(String username, String password) {
+		getPresenter().onUserLogin(getContext(), username, password);
+	}
+
+	@Override
+	public void onUserLoggedIn(boolean loggedInSuccessfully) {
+		if (loggedInSuccessfully) {
+			Toast.makeText(getContext(), R.string.logged_in_successfully, Toast.LENGTH_SHORT).show();
+			restartActivity();
+		} else {
+			Toast.makeText(getContext(), R.string.failed_to_login, Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void restartActivity() {
+		getActivity().finish();
+		MainActivity.startActivity(getContext());
 	}
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.chrono.src.ui.list.OnItemClickListener;
 import com.chrono.src.ui.list.endless.EndlessListFragment;
@@ -11,12 +12,11 @@ import com.chrono.src.ui.states.error.ErrorView;
 import com.chrono.src.ui.states.error.StandardErrorView;
 import com.greak.R;
 import com.greak.data.database.UserInstance;
-import com.greak.data.database.UserManager;
-import com.greak.data.models.Account;
 import com.greak.data.models.FeedItem;
 import com.greak.data.models.Post;
 import com.greak.ui.common.FragmentCommunicationUtils;
 import com.greak.ui.common.resolvers.OnLoginListener;
+import com.greak.ui.screens.main.MainActivity;
 import com.greak.ui.screens.main.common.FeedVoteViewHandler;
 import com.greak.ui.screens.main.common.OnRefreshListener;
 import com.greak.ui.screens.main.common.PostSpacingItemDecoration;
@@ -28,9 +28,10 @@ import com.greak.ui.screens.post.PostActivity;
 import java.util.List;
 
 public class FeedListFragment extends EndlessListFragment<Post, FeedItem, PostsMultiAdapter> implements
-		OnItemClickListener<Post>, OnLoginListener, ScrollableToTop {
+		OnItemClickListener<Post>, OnLoginListener, ScrollableToTop, FeedView {
 
 	private OnRefreshListener refreshListener;
+	private FeedPresenter presenter;
 
 	@Override
 	public void onAttach(Context context) {
@@ -43,7 +44,9 @@ public class FeedListFragment extends EndlessListFragment<Post, FeedItem, PostsM
 
 	@Override
 	public FeedPresenter createPresenter() {
-		return new FeedPresenter(this);
+		presenter = new FeedPresenter(this);
+		presenter.setView(this);
+		return presenter;
 	}
 
 	@Override
@@ -93,10 +96,22 @@ public class FeedListFragment extends EndlessListFragment<Post, FeedItem, PostsM
 	}
 
 	@Override
-	public void onUserLogin(String username) {
-		refreshListener.onRefresh();
+	public void onUserLogin(String username, String password) {
+		presenter.onUserLogin(getContext(), username, password);
+	}
 
-		UserManager userManager = new UserManager(getContext());
-		userManager.setAccount(new Account(username));
+	@Override
+	public void onUserLoggedIn(boolean loggedInSuccessfully) {
+		if (loggedInSuccessfully) {
+			Toast.makeText(getContext(), R.string.logged_in_successfully, Toast.LENGTH_SHORT).show();
+			restartActivity();
+		} else {
+			Toast.makeText(getContext(), R.string.failed_to_login, Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void restartActivity() {
+		getActivity().finish();
+		MainActivity.startActivity(getContext());
 	}
 }

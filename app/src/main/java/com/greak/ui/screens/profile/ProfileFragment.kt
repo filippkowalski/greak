@@ -5,20 +5,24 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.chrono.src.common.utils.VisibilityUtils
 import com.greak.R
 import com.greak.common.utils.StatsConstants
+import com.greak.data.converters.LoginService
 import com.greak.data.database.UserInstance
 import com.greak.data.database.UserManager
-import com.greak.data.models.Account
 import com.greak.ui.analytics.FabricAnalyticsManager
 import com.greak.ui.common.resolvers.OnLoginListener
 import com.greak.ui.screens.login.SignInDialogFragment
 import com.greak.ui.screens.main.MainActivity
+import eu.bittrade.libs.steemj.exceptions.SteemCommunicationException
+import eu.bittrade.libs.steemj.exceptions.SteemResponseException
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(), OnLoginListener {
-
     private var userManager: UserManager? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -108,10 +112,25 @@ class ProfileFragment : Fragment(), OnLoginListener {
         }
     }
 
-    override fun onUserLogin(username: String) {
+    override fun onUserLogin(username: String, password: String) {
+        val service = LoginService(context, username, password)
+        try {
+            service.data
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnNext { onUserLoggedIn(true) }
+                    .onErrorReturn {
+                        onUserLoggedIn(false)
+                        false
+                    }
+                    .subscribe()
+        } catch (e: SteemResponseException) {
+            onUserLoggedIn(false)
+        } catch (e: SteemCommunicationException) {
+            onUserLoggedIn(false)
+        }
+
         restartActivity()
-        val userManager = UserManager(context)
-        userManager.account = Account(username)
     }
 
     private fun restartActivity() {
@@ -119,7 +138,17 @@ class ProfileFragment : Fragment(), OnLoginListener {
         MainActivity.startActivity(activity)
     }
 
+    private fun onUserLoggedIn(loggedInSuccessfully: Boolean) {
+        if (loggedInSuccessfully) {
+            Toast.makeText(context, R.string.logged_in_successfully, Toast.LENGTH_SHORT).show()
+            restartActivity()
+        } else {
+            Toast.makeText(context, R.string.failed_to_login, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     companion object {
+
         fun newInstance(): ProfileFragment {
             return ProfileFragment()
         }
