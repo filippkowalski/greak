@@ -30,7 +30,6 @@ import com.greak.ui.screens.main.filtered_lists.OnFeedRefreshListener;
 import com.greak.ui.screens.post.clickhandlers.ObserveHandler;
 import com.greak.ui.screens.post.clickhandlers.OnLoginRequired;
 import com.greak.ui.screens.post.clickhandlers.VoteHandler;
-import com.greak.ui.screens.user_profile.UserProfileActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -189,7 +188,8 @@ public class PostFragment extends BaseFragment<PostPresenter> implements OnLogin
 
 	@OnClick({R.id.image_channel_avatar, R.id.text_name_channel, R.id.text_description_channel})
 	public void onChannelClicked() {
-		UserProfileActivity.Companion.startActivity(getContext(), post.getSteemAccount());
+		// TODO no all data is available
+//		UserProfileActivity.Companion.startActivity(getContext(), post.getSteemAccount());
 	}
 
 	@OnClick(R.id.button_comments_post)

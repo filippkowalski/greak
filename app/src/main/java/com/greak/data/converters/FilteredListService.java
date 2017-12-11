@@ -54,7 +54,7 @@ public class FilteredListService {
 
 		List<Post> posts = new ArrayList<>();
 		DiscussionQuery discussionQuery = new DiscussionQuery();
-		discussionQuery.setLimit(10);
+		discussionQuery.setLimit(50);
 		List<Discussion> discussionList = steemJ.getDiscussionsBy(discussionQuery, getDiscussionSortType());
 		for (Discussion discussion : discussionList) {
 			String coverPhotoUrl = null; //TODO

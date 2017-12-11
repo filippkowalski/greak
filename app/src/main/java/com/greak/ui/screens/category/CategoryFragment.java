@@ -11,7 +11,6 @@ import com.greak.common.utils.StatsConstants;
 import com.greak.data.models.Category;
 import com.greak.data.models.SteemAccount;
 import com.greak.ui.analytics.FabricAnalyticsManager;
-import com.greak.ui.screens.user_profile.UserProfileActivity;
 
 import java.util.List;
 
@@ -49,7 +48,8 @@ public class CategoryFragment extends EndlessListFragment<SteemAccount, SteemAcc
 
 	@Override
 	public void onItemClick(SteemAccount steemAccount, int position) {
-		UserProfileActivity.Companion.startActivity(getContext(), steemAccount);
+		// TODO no all data is available
+//		UserProfileActivity.Companion.startActivity(getContext(), steemAccount);
 	}
 
 	@Override

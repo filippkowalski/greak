@@ -109,7 +109,7 @@ public class LoginByObserveTest {
 		appCompatTextView2.perform(click());
 
 		ViewInteraction appCompatEditText = onView(
-				allOf(withId(R.id.edit_login_email),
+				allOf(withId(R.id.edit_login_username),
 						childAtPosition(
 								childAtPosition(
 										withId(R.id.custom),

@@ -20,7 +20,6 @@ import com.greak.data.database.UserActionsPreferences;
 import com.greak.data.models.Post;
 import com.greak.ui.common.TagViewUtils;
 import com.greak.ui.screens.post.clickhandlers.VoteHandler;
-import com.greak.ui.screens.user_profile.UserProfileActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +53,8 @@ public class PostAdapter implements MultiTypeAdapter<PostAdapter.ViewHolder, Pos
 		final VoteHandler voteHandler = new VoteHandler(context);
 		voteHandler.changeButtonViewStyle(holder.earnedMoney, postLiked);
 
-		holder.containerChannel.setOnClickListener(v -> UserProfileActivity.Companion.startActivity(context, post.getSteemAccount()));
+		// TODO no all data is available
+//		holder.containerChannel.setOnClickListener(v -> UserProfileActivity.Companion.startActivity(context, post.getSteemAccount()));
 		holder.timeAdded.setReferenceTime(post.getDateCreatedAsTimestamp());
 		holder.postTitle.setText(post.getTitle());
 		holder.authorName.setText(post.getSteemAccount().getName());

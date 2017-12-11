@@ -19,7 +19,7 @@ import com.greak.ui.common.resolvers.OnLoginListener;
 public class SignInDialogFragment extends AppCompatDialogFragment {
 
 	private OnLoginListener listener;
-	private EditText email;
+	private EditText username;
 	private EditText password;
 	private TextView footer;
 
@@ -42,7 +42,8 @@ public class SignInDialogFragment extends AppCompatDialogFragment {
 		builder.setView(view)
 				.setNegativeButton(R.string.cancel, (dialog, which) -> dismiss())
 				.setPositiveButton(R.string.sign_in, (dialog, which) ->
-						listener.onUserLogin(email.getText().toString(), password.getText().toString()));
+						//TODO implement password input
+						listener.onUserLogin(username.getText().toString(), "TODO"));
 		return builder.create();
 	}
 
@@ -50,7 +51,7 @@ public class SignInDialogFragment extends AppCompatDialogFragment {
 	private View initLayout() {
 		View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_sign_in, null);
 
-		email = view.findViewById(R.id.edit_login_email);
+		username = view.findViewById(R.id.edit_login_username);
 		password = view.findViewById(R.id.edit_login_password);
 		footer = view.findViewById(R.id.text_login_footer);
 		footer.setMovementMethod(LinkMovementMethod.getInstance());

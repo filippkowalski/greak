@@ -57,7 +57,6 @@ public class UserDetailsService {
 					post.setTitle(commentOperation.getTitle());
 					// TODO temporary setters
 					post.setCategory(new Category("test"));
-					post.setCommentsCount(123);
 					post.setMoneyEarned(64.32);
 					post.setReadTime(3);
 					post.setDateCreated("2000-12-12'T'10:11:12");
