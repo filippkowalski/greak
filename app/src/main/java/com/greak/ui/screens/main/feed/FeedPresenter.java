@@ -42,7 +42,7 @@ class FeedPresenter extends EndlessListPresenter<Post> {
 
 	private void handleDataDownload(Account account) {
 		AccountName accountName = new AccountName(account.getUsername());
-		FeedService feedService = new FeedService(accountName, 0, (short) 50);
+		FeedService feedService = new FeedService(accountName, 0, (short) 20);
 		try {
 			feedService.getData()
 					.subscribeOn(Schedulers.io())

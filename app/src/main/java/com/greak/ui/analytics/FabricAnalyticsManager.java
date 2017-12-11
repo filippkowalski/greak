@@ -13,10 +13,10 @@ public class FabricAnalyticsManager {
 		}
 	}
 
-	public static void logEvent(String contentType, int contenValue) {
+	public static void logEvent(String contentType, int contentValue) {
 		if (!BuildConfig.DEBUG) {
 			Answers.getInstance().logCustom(new CustomEvent(contentType)
-					.putCustomAttribute("Content Value", contenValue));
+					.putCustomAttribute("Content Value", contentValue));
 		}
 	}
 }

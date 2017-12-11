@@ -4,7 +4,6 @@ import android.support.multidex.MultiDexApplication;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
-import com.greak.BuildConfig;
 import com.greak.R;
 import com.greak.data.database.UserManager;
 
@@ -22,9 +21,9 @@ public class GreakApplication extends MultiDexApplication {
 				.build()
 		);
 
-		if (!BuildConfig.DEBUG) {
+//		if (!BuildConfig.DEBUG) {
 			Fabric.with(this, new Answers(), new Crashlytics());
-		}
+//		}
 
 		UserManager userManager = new UserManager(this);
 		userManager.initializeUser();
