@@ -25,12 +25,12 @@ repositories {
 android {
     signingConfigs {
     }
-    compileSdkVersion 27
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.greak"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 26
         versionCode 1
         versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -76,7 +76,7 @@ android {
     }
 }
 
-ext.supportVersion = '27.0.2'
+ext.supportVersion = '26.0.1'
 ext.ankoVersion = '0.10.1'
 
 dependencies {
